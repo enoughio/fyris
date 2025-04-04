@@ -4,10 +4,11 @@ import CredibilitySection from "@/components/credibility-section"
 import CaseStudiesSection from "@/components/case-studies-section"
 import ProcessSection from "@/components/process-section"
 import ContactSection from "@/components/contact-section"
-import type { Metadata } from "next"
+import { Metadata } from "next"
+
 
 export const metadata: Metadata = {
-  title: "Ignivox - AI-Powered Software Solutions | Bhopal, Madhya Pradesh",
+  title: "Fyris - AI-Powered Software Solutions | Bhopal, Madhya Pradesh",
   description:
     "Leading software development agency in Bhopal offering AI-powered solutions, custom web development, mobile apps, cloud services, and cybersecurity solutions.",
   keywords:

@@ -116,8 +116,8 @@ export default function Footer() {
               </li>
               <li className="flex items-center">
                 <Mail className="mr-2 h-5 w-5 text-purple-500" />
-                <a href="mailto:hello@ignivox.com" className="text-gray-400 hover:text-white transition-colors">
-                  hello@ignivox.com
+                <a href="mailto:hello@fyris.com" className="text-gray-400 hover:text-white transition-colors">
+                  hello@fyris.com
                 </a>
               </li>
             </ul>
@@ -126,7 +126,7 @@ export default function Footer() {
 
         <div className="mt-12 pt-8 border-t border-gray-800">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">&copy; {new Date().getFullYear()} Ignivox. All rights reserved.</p>
+            <p className="text-gray-400 text-sm">&copy; {new Date().getFullYear()} Fyris. All rights reserved.</p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <Link href="/privacy-policy" className="text-gray-400 hover:text-white text-sm transition-colors">
                 Privacy Policy

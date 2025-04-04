@@ -9,7 +9,7 @@ import Footer from "@/components/footer"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Ignivox - AI-Powered Software Solutions for the Future | Bhopal",
+  title: "Fyris - AI-Powered Software Solutions for the Future | Bhopal",
   description:
     "Leading software development agency in Bhopal, Madhya Pradesh offering AI-powered solutions, custom web development, mobile apps, cloud services, and cybersecurity solutions.",
   keywords:

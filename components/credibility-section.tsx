@@ -127,7 +127,7 @@ export default function CredibilitySection() {
       position: "CTO",
       company: "TechSolutions Bhopal",
       testimonial:
-        "Ignivox helped us create a modern website that perfectly represents our brand. Despite being a new agency, their team showed exceptional skill and dedication.",
+        "Fyris helped us create a modern website that perfectly represents our brand. Despite being a new agency, their team showed exceptional skill and dedication.",
       rating: 5,
     },
     {
@@ -135,7 +135,7 @@ export default function CredibilitySection() {
       position: "CEO",
       company: "InnovateMP",
       testimonial:
-        "As a startup ourselves, we appreciated Ignivox's fresh perspective and innovative approach. They delivered our mobile app on time and within budget.",
+        "As a startup ourselves, we appreciated Fyris's fresh perspective and innovative approach. They delivered our mobile app on time and within budget.",
       rating: 5,
     },
     {
@@ -170,7 +170,7 @@ export default function CredibilitySection() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="gradient-text">Why Choose Ignivox?</span>
+            <span className="gradient-text">Why Choose Fyris?</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             We may be new, but we're passionate, innovative, and committed to delivering exceptional results for our

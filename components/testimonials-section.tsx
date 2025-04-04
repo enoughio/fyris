@@ -10,7 +10,7 @@ export default function TestimonialsSection() {
       position: "CTO",
       company: "TechSolutions Bhopal",
       testimonial:
-        "Ignivox transformed our outdated systems into a cutting-edge digital platform. Their AI-powered solutions have increased our operational efficiency by 40%.",
+        "Fyris transformed our outdated systems into a cutting-edge digital platform. Their AI-powered solutions have increased our operational efficiency by 40%.",
       rating: 5,
     },
     {
@@ -18,7 +18,7 @@ export default function TestimonialsSection() {
       position: "CEO",
       company: "InnovateMP",
       testimonial:
-        "Working with Ignivox was a game-changer for our startup. Their team delivered a mobile app that exceeded our expectations and helped us secure additional funding.",
+        "Working with Fyris was a game-changer for our startup. Their team delivered a mobile app that exceeded our expectations and helped us secure additional funding.",
       rating: 5,
     },
     {
@@ -26,7 +26,7 @@ export default function TestimonialsSection() {
       position: "Marketing Director",
       company: "Bhopal Retail Group",
       testimonial:
-        "The e-commerce platform developed by Ignivox has significantly increased our online sales. Their attention to detail and focus on user experience is unmatched.",
+        "The e-commerce platform developed by Fyris has significantly increased our online sales. Their attention to detail and focus on user experience is unmatched.",
       rating: 4,
     },
     {
@@ -34,7 +34,7 @@ export default function TestimonialsSection() {
       position: "Operations Manager",
       company: "MP Healthcare",
       testimonial:
-        "Ignivox helped us implement a secure patient management system that streamlined our operations. Their cybersecurity expertise was invaluable to our healthcare practice.",
+        "Fyris helped us implement a secure patient management system that streamlined our operations. Their cybersecurity expertise was invaluable to our healthcare practice.",
       rating: 5,
     },
   ]

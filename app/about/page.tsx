@@ -16,7 +16,7 @@ function InteractiveTimeline() {
       year: "2018",
       title: "Founded in Bhopal",
       description:
-        "Ignivox was established with a vision to bring cutting-edge technology solutions to businesses in Madhya Pradesh.",
+        "Fyris was established with a vision to bring cutting-edge technology solutions to businesses in Madhya Pradesh.",
       highlight: "Started with a team of 5 passionate developers",
     },
     {
@@ -350,7 +350,7 @@ export default function AboutPage() {
                 {activeSection === "company" && (
                   <>
                     <p className="text-xl text-gray-300 mb-4">
-                      Ignivox is a leading software development agency based in Bhopal, Madhya Pradesh, specializing in
+                      Fyris is a leading software development agency based in Bhopal, Madhya Pradesh, specializing in
                       AI-powered solutions that drive business growth and innovation.
                     </p>
                     <p className="text-gray-400 mb-8">

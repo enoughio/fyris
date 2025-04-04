@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: "thebagaboo@gmail.com",
-      subject: `Ignivox Contact Form: ${name} - ${company || "No Company"}`,
+      subject: `Fyris Contact Form: ${name} - ${company || "No Company"}`,
       html: `
         <h2>New Contact Form Submission</h2>
         <p><strong>Name:</strong> ${name}</p>

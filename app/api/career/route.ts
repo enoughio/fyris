@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: "thebagaboo@gmail.com",
-      subject: `Ignivox Career Application: ${position} - ${name}`,
+      subject: `Fyris Career Application: ${position} - ${name}`,
       html: `
         <h2>New Job Application</h2>
         <p><strong>Position:</strong> ${position}</p>

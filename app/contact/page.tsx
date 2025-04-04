@@ -114,9 +114,9 @@ function FAQ() {
 
   const faqs = [
     {
-      question: "What services does Ignivox offer?",
+      question: "What services does Fyris offer?",
       answer:
-        "Ignivox offers a wide range of services including custom web development, AI & automation solutions, cloud & DevOps consulting, mobile app development, and cybersecurity & blockchain services.",
+        "Fyris offers a wide range of services including custom web development, AI & automation solutions, cloud & DevOps consulting, mobile app development, and cybersecurity & blockchain services.",
     },
     {
       question: "How long does a typical project take?",
@@ -280,7 +280,7 @@ export default function ContactPage() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Ignivox Office Location"
+                title="Fyris Office Location"
               ></iframe>
             </div>
           </div>
