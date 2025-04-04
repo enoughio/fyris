@@ -48,7 +48,7 @@ export default function Navbar() {
                 transition={{ duration: 0.5 }}
                 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-cyan-400 to-blue-500"
               >
-                IGNIVOX
+                Fyris
               </motion.div>
             </Link>
           </div>
