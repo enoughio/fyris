@@ -9,45 +9,37 @@ import { ChevronRight, Users, Award, Target, Zap, ArrowRight, ArrowLeft } from "
 
 // Interactive timeline component
 function InteractiveTimeline() {
-  const [activeYear, setActiveYear] = useState("2021")
+  const [activeYear, setActiveYear] = useState("2023")
 
   const timelineItems = [
     {
-      year: "2018",
-      title: "Founded in Bhopal",
+      id : 1,
+      year: "2023",
+      title: "Our Beginning",
       description:
         "Fyris was established with a vision to bring cutting-edge technology solutions to businesses in Madhya Pradesh.",
-      highlight: "Started with a team of 5 passionate developers",
+      highlight: "Started with a team of 3 passionate developers",
     },
     {
-      year: "2019",
-      title: "First Major Project",
-      description: "Completed our first enterprise-level project for a leading retail chain in Bhopal.",
-      highlight: "Increased team size to 10 members",
-    },
-    {
-      year: "2020",
-      title: "Expanded Services",
-      description: "Added AI and machine learning capabilities to our service offerings.",
-      highlight: "Partnered with 3 major technology providers",
-    },
-    {
-      year: "2021",
+      id: 2,
+      year: "2024",
       title: "Team Growth",
-      description: "Expanded our team to 25+ talented developers, designers, and project managers.",
-      highlight: "Moved to a larger office space",
+      description: "Expanded our team to 7 talented developers, designers, and project managers.",
+      highlight: "Moved to our first office space",
     },
     {
-      year: "2022",
-      title: "New Office",
-      description: "Moved to our new headquarters in MP Nagar, Bhopal with state-of-the-art facilities.",
-      highlight: "Launched our internship program",
+      id: 3,
+      year: "2024",
+      title: "First Projects",
+      description: "Successfully completed our first client projects, establishing our reputation for quality work.",
+      highlight: "Delivered 8 successful projects",
     },
     {
-      year: "2023",
-      title: "National Recognition",
-      description: "Recognized as one of the top emerging tech companies in Central India.",
-      highlight: "Expanded client base to 50+ businesses across India",
+      id: 4,
+      year: "2025-26",
+      title: "Future Goals",
+      description: "Looking ahead to expand our services and client base while maintaining our commitment to quality.",
+      highlight: "Aiming to double our project portfolio",
     },
   ]
 
@@ -83,7 +75,7 @@ function InteractiveTimeline() {
         <div className="flex space-x-2">
           {timelineItems.map((item) => (
             <button
-              key={item.year}
+              key={item.id}
               onClick={() => setActiveYear(item.year)}
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
                 item.year === activeYear ? "bg-purple-500 scale-125" : "bg-gray-700 hover:bg-gray-600"
@@ -114,7 +106,7 @@ function InteractiveTimeline() {
 
         {timelineItems.map((item, index) => (
           <motion.div
-            key={item.year}
+            key={item.id}
             initial={{ opacity: 0, x: 20 }}
             animate={{
               opacity: item.year === activeYear ? 1 : 0,
@@ -141,7 +133,12 @@ function TeamMember({
   position,
   image,
   index,
-}: { name: string; position: string; image?: string; index: number }) {
+}: {
+  name: string
+  position: string
+  image?: string
+  index: number
+}) {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
@@ -211,7 +208,12 @@ function ValueCard({
   title,
   description,
   index,
-}: { icon: React.ReactNode; title: string; description: string; index: number }) {
+}: {
+  icon: React.ReactNode
+  title: string
+  description: string
+  index: number
+}) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -242,23 +244,27 @@ export default function AboutPage() {
     },
     {
       name: "Ananya Sharma",
-      position: "CTO",
-    },
-    {
-      name: "Rajat Verma",
       position: "Lead Developer",
     },
     {
-      name: "Priya Patel",
+      name: "Rajat Verma",
       position: "UI/UX Designer",
     },
     {
+      name: "Priya Patel",
+      position: "Frontend Developer",
+    },
+    {
       name: "Arjun Kumar",
-      position: "AI Specialist",
+      position: "Backend Developer",
     },
     {
       name: "Neha Gupta",
       position: "Project Manager",
+    },
+    {
+      name: "Sanjay Mehta",
+      position: "Marketing Specialist",
     },
   ]
 
@@ -350,13 +356,13 @@ export default function AboutPage() {
                 {activeSection === "company" && (
                   <>
                     <p className="text-xl text-gray-300 mb-4">
-                      Fyris is a leading software development agency based in Bhopal, Madhya Pradesh, specializing in
-                      AI-powered solutions that drive business growth and innovation.
+                      Fyris is a young and dynamic software development agency based in Bhopal, Madhya Pradesh,
+                      specializing in creating innovative digital solutions for businesses of all sizes.
                     </p>
                     <p className="text-gray-400 mb-8">
-                      Founded in 2018, we've grown from a small team of passionate developers to a full-service digital
-                      agency with expertise across web development, mobile applications, AI solutions, cloud
-                      infrastructure, and cybersecurity.
+                      Founded in 2022, we've quickly grown to a team of 7 passionate professionals with expertise in web
+                      development, mobile applications, UI/UX design, and digital marketing. Though we're new to the
+                      industry, we bring fresh perspectives and cutting-edge approaches to every project we undertake.
                     </p>
                   </>
                 )}
@@ -364,13 +370,13 @@ export default function AboutPage() {
                 {activeSection === "mission" && (
                   <>
                     <p className="text-xl text-gray-300 mb-4">
-                      Our mission is to empower businesses through innovative technology solutions that solve real-world
-                      problems.
+                      Our mission is to empower local businesses in Madhya Pradesh through innovative technology
+                      solutions that solve real-world problems.
                     </p>
                     <p className="text-gray-400 mb-8">
                       We are committed to delivering high-quality, scalable, and secure software that helps our clients
-                      achieve their business objectives and stay ahead of the competition in the rapidly evolving
-                      digital landscape.
+                      achieve their business objectives and establish a strong digital presence. We believe that
+                      technology should be accessible to businesses of all sizes, and we work to make that a reality.
                     </p>
                   </>
                 )}
@@ -378,12 +384,13 @@ export default function AboutPage() {
                 {activeSection === "vision" && (
                   <>
                     <p className="text-xl text-gray-300 mb-4">
-                      We envision a future where businesses of all sizes can harness the power of cutting-edge
-                      technology to transform their operations and customer experiences.
+                      We envision becoming the most trusted technology partner for businesses in Central India, known
+                      for our technical excellence, innovative solutions, and exceptional client service.
                     </p>
                     <p className="text-gray-400 mb-8">
-                      Our goal is to become the most trusted technology partner for businesses in Central India and
-                      beyond, known for our technical excellence, innovative solutions, and exceptional client service.
+                      Our goal is to grow alongside our clients, helping them navigate the digital landscape and
+                      leverage technology to achieve their business goals. We aim to build long-term relationships based
+                      on trust, transparency, and mutual success.
                     </p>
                   </>
                 )}
@@ -406,7 +413,7 @@ export default function AboutPage() {
             >
               <img
                 src="/placeholder.svg?height=400&width=600"
-                alt="Innovative technology"
+                alt="Our team at work"
                 className="w-full h-auto rounded-lg"
               />
             </motion.div>
@@ -428,8 +435,8 @@ export default function AboutPage() {
               <span className="gradient-text">Our Journey</span>
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              From our humble beginnings to becoming a leading tech company in Madhya Pradesh, here's how we've evolved
-              over the years.
+              Though we're just getting started, we've already made significant progress in our mission to deliver
+              exceptional technology solutions to businesses in Madhya Pradesh.
             </p>
           </motion.div>
 
@@ -451,12 +458,12 @@ export default function AboutPage() {
               <span className="gradient-text">Meet Our Team</span>
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              Our talented team of experts is passionate about creating innovative solutions that drive your business
-              forward.
+              Our team of 7 passionate professionals brings together diverse skills and perspectives to deliver
+              exceptional results for our clients.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {teamMembers.map((member, index) => (
               <TeamMember key={index} name={member.name} position={member.position} index={index} />
             ))}
