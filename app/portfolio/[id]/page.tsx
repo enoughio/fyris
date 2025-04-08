@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 import { ChevronLeft, ExternalLink, Calendar } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
-import { use } from 'react'; // Import the use hook
 
 interface Project {
   id: string
@@ -26,10 +25,6 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
   const router = useRouter()
   const [project, setProject] = useState<Project | null>(null)
   const [loading, setLoading] = useState(true)
-
-  // Unwrap the params object using React.use()
-  const unwrappedParams = use(Promise.resolve(params));
-  const projectId = unwrappedParams.id;
 
   useEffect(() => {
     // In a real application, you would fetch the project data from an API
@@ -126,14 +121,14 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
       },
     ]
 
-    const currentProject = projects.find((p) => p.id === projectId)
+    const currentProject = projects.find((p) => p.id === params.id)
 
     if (currentProject) {
       setProject(currentProject)
     }
 
     setLoading(false)
-  }, [projectId]) // Update the dependency array
+  }, [params.id])
 
   if (loading) {
     return (
@@ -281,7 +276,6 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* This would typically be populated with related projects */}
             <div
-              key="e-commerce" // Added key prop here
               className="glass-card overflow-hidden cursor-pointer group"
               onClick={() => router.push("/portfolio/e-commerce")}
             >
@@ -345,4 +339,3 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
     </div>
   )
 }
-

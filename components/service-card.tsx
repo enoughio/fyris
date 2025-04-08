@@ -89,4 +89,3 @@ export default function ServiceCard({ title, description, icon, href, gradient }
     </motion.div>
   )
 }
-

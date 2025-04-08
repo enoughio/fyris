@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
             <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-cyan-400 to-blue-500 mb-4">
-              IGNIVOX
+              FYRIS
             </h3>
             <p className="text-gray-400 mb-4">
               AI-Powered Software Solutions for the Future. Based in Bhopal, Madhya Pradesh, serving clients worldwide.
@@ -116,8 +116,8 @@ export default function Footer() {
               </li>
               <li className="flex items-center">
                 <Mail className="mr-2 h-5 w-5 text-purple-500" />
-                <a href="mailto:hello@fyris.com" className="text-gray-400 hover:text-white transition-colors">
-                  hello@fyris.com
+                <a href="mailto:thebagaboo@gmail.com" className="text-gray-400 hover:text-white transition-colors">
+                  thebagaboo@gmail.com
                 </a>
               </li>
             </ul>
@@ -144,4 +144,3 @@ export default function Footer() {
     </footer>
   )
 }
-

@@ -11,6 +11,10 @@ import { motion } from "framer-motion"
 import { Send, CheckCircle } from "lucide-react"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
+// Google Sheets Web App URL - kept as a constant to protect it
+const GOOGLE_SHEETS_CONTACT_FORM_URL =
+  "https://script.google.com/macros/s/AKfycbxNmlUr857QCh7u39p7HPyRUeu8p1iaGkxxhv1S-qFYIINqyfVd2pJPWZbbInFQ83vt/exec"
+
 export default function ContactForm() {
   const [formState, setFormState] = useState({
     name: "",
@@ -40,20 +44,21 @@ export default function ContactForm() {
     setError(null)
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formState),
+      // Create form data for submission
+      const formData = new FormData()
+      Object.entries(formState).forEach(([key, value]) => {
+        formData.append(key, value as string)
       })
 
-      const data = await response.json()
+      // Submit to Google Sheets
+      const response = await fetch(GOOGLE_SHEETS_CONTACT_FORM_URL, {
+        method: "POST",
+        body: formData,
+        mode: "no-cors", // This is important for Google Sheets Web App
+      })
 
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to submit form")
-      }
-
+      // Since we're using no-cors, we can't actually check the response status
+      // So we'll assume success if no error is thrown
       setIsSubmitting(false)
       setIsSubmitted(true)
 
@@ -242,4 +247,3 @@ export default function ContactForm() {
     </motion.div>
   )
 }
-

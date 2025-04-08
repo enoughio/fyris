@@ -70,4 +70,3 @@ export default function TestimonialCard({ name, position, company, testimonial, 
     </motion.div>
   )
 }
-

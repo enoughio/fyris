@@ -12,6 +12,10 @@ import { Send, CheckCircle } from "lucide-react"
 import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
+// Google Sheets Web App URL - kept as a constant to protect it
+const GOOGLE_SHEETS_CAREER_FORM_URL =
+  "https://script.google.com/macros/s/AKfycbw1fryFvJ6p1n_MRb8hc7pkNRow0oGulSpFetpQzPxa8TydzIPIdu781qCvPn9T-3do/exec"
+
 export default function CareerForm({ position = "" }) {
   const [formState, setFormState] = useState({
     name: "",
@@ -42,18 +46,21 @@ export default function CareerForm({ position = "" }) {
     setError(null)
 
     try {
-      const response = await fetch("/api/career", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formState),
+      // Create form data for submission
+      const formData = new FormData()
+      Object.entries(formState).forEach(([key, value]) => {
+        formData.append(key, value as string)
       })
 
-      if (!response.ok) {
-        throw new Error("Failed to submit application")
-      }
+      // Submit to Google Sheets
+      const response = await fetch(GOOGLE_SHEETS_CAREER_FORM_URL, {
+        method: "POST",
+        body: formData,
+        mode: "no-cors", // This is important for Google Sheets Web App
+      })
 
+      // Since we're using no-cors, we can't actually check the response status
+      // So we'll assume success if no error is thrown
       setIsSubmitting(false)
       setIsSubmitted(true)
 
@@ -274,4 +281,3 @@ export default function CareerForm({ position = "" }) {
     </motion.div>
   )
 }
-
