@@ -7,12 +7,24 @@ import { ChevronRight, Mail, Phone, MapPin, Clock, ArrowRight } from "lucide-rea
 import ContactForm from "@/components/contact-form"
 import { useState } from "react"
 
+interface Office {
+  name: string;
+  address: string;
+  phone: string;
+  email: string;
+  hours: string;
+  mapUrl: string;
+}
+
+interface Offices {
+  [key: string]: Office;
+}
 
 // Interactive office location selector
-function OfficeLocations() {
-  const [activeOffice, setActiveOffice] = useState("bhopal")
+const OfficeLocations = () => {
+  const [activeOffice, setActiveOffice] = useState<keyof Offices>("bhopal")
 
-  const offices = {
+  const offices: Offices = {
     bhopal: {
       name: "Bhopal (Headquarters)",
       address: "MP Nagar, Zone I, Bhopal, Madhya Pradesh 462011",
@@ -48,7 +60,7 @@ function OfficeLocations() {
           <Button
             key={key}
             variant={activeOffice === key ? "default" : "outline"}
-            onClick={() => setActiveOffice(key)}
+            onClick={() => setActiveOffice(key as keyof Offices)}
             className={
               activeOffice === key
                 ? "bg-gradient-to-r from-purple-600 to-blue-600"
@@ -111,7 +123,7 @@ function OfficeLocations() {
 
 // FAQ Accordion
 function FAQ() {
-  const [activeQuestion, setActiveQuestion] = useState<number | null >(null)
+  const [activeQuestion, setActiveQuestion] = useState<number | null>(null)
 
   const faqs = [
     {

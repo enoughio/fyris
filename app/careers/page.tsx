@@ -25,12 +25,9 @@ export const metadata: Metadata = {
     type: "website",
   },
 }
-;
 
-
-export default function (){
-  <div>
+export default function Page(){
+  return (
     <CareersPage />
-  </div>
+  )
 }
-  

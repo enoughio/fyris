@@ -16,15 +16,17 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 const GOOGLE_SHEETS_CAREER_FORM_URL =
   "https://script.google.com/macros/s/AKfycbw1fryFvJ6p1n_MRb8hc7pkNRow0oGulSpFetpQzPxa8TydzIPIdu781qCvPn9T-3do/exec"
 
-export default function CareerForm({ position = "" }) {
+export default function CareerForm({ role = "" }) {
   const [formState, setFormState] = useState({
     name: "",
     email: "",
     phone: "",
-    position: position,
-    experience: "",
-    message: "",
+    location: "",
+    linkedin: "",
+    portfolio: "",
+    role: role,
     resumeLink: "",
+    message: "",
   })
 
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -46,21 +48,19 @@ export default function CareerForm({ position = "" }) {
     setError(null)
 
     try {
-      // Create form data for submission
-      const formData = new FormData()
-      Object.entries(formState).forEach(([key, value]) => {
-        formData.append(key, value as string)
-      })
-
-      // Submit to Google Sheets
+      // Send JSON data to Google Sheets
       const response = await fetch(GOOGLE_SHEETS_CAREER_FORM_URL, {
         method: "POST",
-        body: formData,
-        mode: "no-cors", // This is important for Google Sheets Web App
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formState),
       })
 
-      // Since we're using no-cors, we can't actually check the response status
-      // So we'll assume success if no error is thrown
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`)
+      }
+
       setIsSubmitting(false)
       setIsSubmitted(true)
 
@@ -71,20 +71,75 @@ export default function CareerForm({ position = "" }) {
           name: "",
           email: "",
           phone: "",
-          position: "",
-          experience: "",
-          message: "",
+          location: "",
+          linkedin: "",
+          portfolio: "",
+          role: "",
           resumeLink: "",
+          message: "",
         })
       }, 5000)
     } catch (error) {
       console.error("Error submitting form:", error)
-      setIsSubmitting(false)
-      setError("There was an error submitting your application. Please try again.")
+
+      // Fallback method using a hidden iframe
+      try {
+        // Create a hidden iframe
+        const iframe = document.createElement("iframe")
+        iframe.name = "hidden-iframe"
+        iframe.style.display = "none"
+        document.body.appendChild(iframe)
+
+        // Create a form that will post to the Google Script
+        const form = document.createElement("form")
+        form.method = "POST"
+        form.action = GOOGLE_SHEETS_CAREER_FORM_URL
+        form.target = "hidden-iframe"
+
+        // Add a hidden input with the JSON data
+        const input = document.createElement("input")
+        input.type = "hidden"
+        input.name = "data"
+        input.value = JSON.stringify(formState)
+        form.appendChild(input)
+
+        // Submit the form
+        document.body.appendChild(form)
+        form.submit()
+
+        // Clean up
+        setTimeout(() => {
+          document.body.removeChild(form)
+          document.body.removeChild(iframe)
+        }, 1000)
+
+        setIsSubmitting(false)
+        setIsSubmitted(true)
+
+        // Reset form after showing success message
+        setTimeout(() => {
+          setIsSubmitted(false)
+          setFormState({
+            name: "",
+            email: "",
+            phone: "",
+            location: "",
+            linkedin: "",
+            portfolio: "",
+            role: "",
+            resumeLink: "",
+            message: "",
+          })
+        }, 5000)
+      } catch (fallbackError) {
+        console.error("Fallback method also failed:", fallbackError)
+        setIsSubmitting(false)
+        setError("There was an error submitting your application. Please try again.")
+      }
     }
   }
 
-  const positions = [
+  const roles = [
     "Senior React Developer",
     "AI Engineer",
     "DevOps Engineer",
@@ -92,13 +147,6 @@ export default function CareerForm({ position = "" }) {
     "Project Manager",
     "QA Engineer",
     "Other",
-  ]
-
-  const experienceLevels = [
-    "Entry Level (0-2 years)",
-    "Mid Level (2-5 years)",
-    "Senior Level (5+ years)",
-    "Lead/Manager (7+ years)",
   ]
 
   return (
@@ -167,35 +215,59 @@ export default function CareerForm({ position = "" }) {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="position" className="text-sm font-medium text-gray-300">
+              <Label htmlFor="location" className="text-sm font-medium text-gray-300">
+                Your Location
+              </Label>
+              <Input
+                id="location"
+                name="location"
+                value={formState.location}
+                onChange={handleChange}
+                placeholder="City, Country"
+                className="bg-gray-900/50 border-gray-700 focus:border-purple-500"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="linkedin" className="text-sm font-medium text-gray-300">
+                LinkedIn Profile
+              </Label>
+              <Input
+                id="linkedin"
+                name="linkedin"
+                value={formState.linkedin}
+                onChange={handleChange}
+                placeholder="https://linkedin.com/in/yourprofile"
+                className="bg-gray-900/50 border-gray-700 focus:border-purple-500"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="portfolio" className="text-sm font-medium text-gray-300">
+                Portfolio Website
+              </Label>
+              <Input
+                id="portfolio"
+                name="portfolio"
+                value={formState.portfolio}
+                onChange={handleChange}
+                placeholder="https://yourportfolio.com"
+                className="bg-gray-900/50 border-gray-700 focus:border-purple-500"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="role" className="text-sm font-medium text-gray-300">
                 Position You're Applying For
               </Label>
-              <Select value={formState.position} onValueChange={(value) => handleSelectChange("position", value)}>
+              <Select value={formState.role} onValueChange={(value) => handleSelectChange("role", value)}>
                 <SelectTrigger className="bg-gray-900/50 border-gray-700 focus:border-purple-500">
                   <SelectValue placeholder="Select a position" />
                 </SelectTrigger>
                 <SelectContent>
-                  {positions.map((position) => (
-                    <SelectItem key={position} value={position}>
-                      {position}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="experience" className="text-sm font-medium text-gray-300">
-                Experience Level
-              </Label>
-              <Select value={formState.experience} onValueChange={(value) => handleSelectChange("experience", value)}>
-                <SelectTrigger className="bg-gray-900/50 border-gray-700 focus:border-purple-500">
-                  <SelectValue placeholder="Select experience level" />
-                </SelectTrigger>
-                <SelectContent>
-                  {experienceLevels.map((level) => (
-                    <SelectItem key={level} value={level}>
-                      {level}
+                  {roles.map((role) => (
+                    <SelectItem key={role} value={role}>
+                      {role}
                     </SelectItem>
                   ))}
                 </SelectContent>

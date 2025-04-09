@@ -173,7 +173,7 @@ function JobDetail({ job }: { job: JobListing }) {
   )
 }
 
-export default function CareersPage() {
+export default function CareersClientPage() {
   const router = useRouter()
   const [selectedJob, setSelectedJob] = useState<JobListing | null>(null)
   const [filter, setFilter] = useState("all")
@@ -376,7 +376,7 @@ export default function CareersPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              <span className="gradient-text">Why Join Fyris?</span>
+              <span className="gradient-text">Why Join Ignivox?</span>
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
               We offer a dynamic work environment where you can grow your skills and make an impact
@@ -532,7 +532,7 @@ export default function CareersPage() {
                   </DialogHeader>
                   <JobDetail job={job} />
                   <div className="mt-6">
-                    <CareerForm position={job.title} />
+                    <CareerForm role={job.title} />
                   </div>
                 </DialogContent>
               </Dialog>
@@ -654,7 +654,7 @@ export default function CareersPage() {
               <span className="gradient-text">Our Team Culture</span>
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              At Fyris, we foster a culture of innovation, collaboration, and continuous learning
+              At Ignivox, we foster a culture of innovation, collaboration, and continuous learning
             </p>
           </motion.div>
 
@@ -731,7 +731,7 @@ export default function CareersPage() {
                   <span className="gradient-text">Ready to Join Our Team?</span>
                 </h2>
                 <p className="text-xl text-gray-300 mb-8">
-                  Explore our current openings and take the next step in your career with Fyris.
+                  Explore our current openings and take the next step in your career with Ignivox.
                 </p>
 
                 <Button
