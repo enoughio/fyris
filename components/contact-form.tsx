@@ -10,6 +10,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { motion } from "framer-motion"
 import { Send, CheckCircle } from "lucide-react"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { addRegistration } from "@/lib/actions.js" // Adjust the import path as necessary
+import { Content } from "next/font/google"
 
 // Google Sheets Web App URL - kept as a constant to protect it
 const GOOGLE_SHEETS_CONTACT_FORM_URL =
@@ -43,25 +45,37 @@ export default function ContactForm() {
     setIsSubmitting(true)
     setError(null)
 
+    
+
     try {
       // Create form data for submission
-      const formData = new FormData()
-      Object.entries(formState).forEach(([key, value]) => {
-        formData.append(key, value as string)
-      })
+      const formData = new FormData(e.target as HTMLFormElement)
+      
+      let name = formData.get("name")
+      console.log("Form Data:", name);
 
-      // Submit to Google Sheets
-      const response = await fetch(GOOGLE_SHEETS_CONTACT_FORM_URL, {
-        method: "POST",
-        body: formData,
-        mode: "no-cors", // This is important for Google Sheets Web App
-      })
 
-      if(!response.ok) {
-        throw new Error("Network response was not ok")
+      const response = await addRegistration(formData)
+      if (!response.successMessage) {
+        throw new Error("Failed to submit form")
       }
 
-      // Since we're using no-cors, we can't actually check the response status
+
+
+
+      // Submit to Google Sheets
+      // const response = await fetch(GOOGLE_SHEETS_CONTACT_FORM_URL, {
+      //   method: "POST",
+      //   body: formData,
+      //   mode: "no-cors", // This is important for Google Sheets Web App
+      // })
+
+
+      // if(!response.ok) {
+      //   throw new Error("Network response was not ok")
+      // }
+
+     
       // So we'll assume success if no error is thrown
       setIsSubmitting(false)
       setIsSubmitted(true)
@@ -77,7 +91,7 @@ export default function ContactForm() {
           service: "",
           message: "",
         })
-      }, 5000)
+      }, 15000)
     } catch (error) {
       console.error("Error submitting form:", error)
       setIsSubmitting(false)

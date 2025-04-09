@@ -11,10 +11,11 @@ import { motion } from "framer-motion"
 import { Send, CheckCircle } from "lucide-react"
 import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { addCarrer } from "@/lib/actions"
 
 // Google Sheets Web App URL - kept as a constant to protect it
-const GOOGLE_SHEETS_CAREER_FORM_URL =
-  "https://script.google.com/macros/s/AKfycbw1fryFvJ6p1n_MRb8hc7pkNRow0oGulSpFetpQzPxa8TydzIPIdu781qCvPn9T-3do/exec"
+// const GOOGLE_SHEETS_CAREER_FORM_URL =
+//   "https://script.google.com/macros/s/AKfycbw1fryFvJ6p1n_MRb8hc7pkNRow0oGulSpFetpQzPxa8TydzIPIdu781qCvPn9T-3do/exec"
 
 export default function CareerForm({ role = "" }) {
   const [formState, setFormState] = useState({
@@ -48,18 +49,15 @@ export default function CareerForm({ role = "" }) {
     setError(null)
 
     try {
-      // Send JSON data to Google Sheets
-      const response = await fetch(GOOGLE_SHEETS_CAREER_FORM_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formState),
-      })
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`)
+
+      const formData = new FormData(e.target as HTMLFormElement)
+      const response = await addCarrer(formData)
+
+      if (!response.successMessage) {
+        throw new Error("Failed to submit form")
       }
+
 
       setIsSubmitting(false)
       setIsSubmitted(true)
@@ -82,60 +80,18 @@ export default function CareerForm({ role = "" }) {
     } catch (error) {
       console.error("Error submitting form:", error)
 
-      // Fallback method using a hidden iframe
-      try {
-        // Create a hidden iframe
-        const iframe = document.createElement("iframe")
-        iframe.name = "hidden-iframe"
-        iframe.style.display = "none"
-        document.body.appendChild(iframe)
-
-        // Create a form that will post to the Google Script
-        const form = document.createElement("form")
-        form.method = "POST"
-        form.action = GOOGLE_SHEETS_CAREER_FORM_URL
-        form.target = "hidden-iframe"
-
-        // Add a hidden input with the JSON data
-        const input = document.createElement("input")
-        input.type = "hidden"
-        input.name = "data"
-        input.value = JSON.stringify(formState)
-        form.appendChild(input)
-
-        // Submit the form
-        document.body.appendChild(form)
-        form.submit()
-
-        // Clean up
-        setTimeout(() => {
-          document.body.removeChild(form)
-          document.body.removeChild(iframe)
-        }, 1000)
-
-        setIsSubmitting(false)
-        setIsSubmitted(true)
-
-        // Reset form after showing success message
-        setTimeout(() => {
-          setIsSubmitted(false)
-          setFormState({
-            name: "",
-            email: "",
-            phone: "",
-            location: "",
-            linkedin: "",
-            portfolio: "",
-            role: "",
-            resumeLink: "",
-            message: "",
-          })
-        }, 5000)
-      } catch (fallbackError) {
-        console.error("Fallback method also failed:", fallbackError)
-        setIsSubmitting(false)
-        setError("There was an error submitting your application. Please try again.")
+      setIsSubmitting(false)
+      setError("Failed to submit your application. Please try again later.")
+      setTimeout(() => {
+        setError(null)
       }
+      , 15000)
+      // Reset form state if needed
+      // setFormState({
+      //   name: "",
+      //   email: "",
+      //   phone: "",
+
     }
   }
 
@@ -260,7 +216,7 @@ export default function CareerForm({ role = "" }) {
               <Label htmlFor="role" className="text-sm font-medium text-gray-300">
                 Position You're Applying For
               </Label>
-              <Select value={formState.role} onValueChange={(value) => handleSelectChange("role", value)}>
+              <Select value={formState.role} name="role" onValueChange={(value) => handleSelectChange("role", value)}>
                 <SelectTrigger className="bg-gray-900/50 border-gray-700 focus:border-purple-500">
                   <SelectValue placeholder="Select a position" />
                 </SelectTrigger>
@@ -353,3 +309,6 @@ export default function CareerForm({ role = "" }) {
     </motion.div>
   )
 }
+
+
+
