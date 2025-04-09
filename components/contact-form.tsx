@@ -13,7 +13,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 // Google Sheets Web App URL - kept as a constant to protect it
 const GOOGLE_SHEETS_CONTACT_FORM_URL =
-  "https://script.google.com/macros/s/AKfycbxNmlUr857QCh7u39p7HPyRUeu8p1iaGkxxhv1S-qFYIINqyfVd2pJPWZbbInFQ83vt/exec"
+ "https://script.google.com/macros/s/AKfycbx4wxcqfRYXmVZ_mPSZheBDZkhg1H5TOeuRa1URExFfnCaBXsdjeBjfRXUd8AFFL15JAg/exec"
 
 export default function ContactForm() {
   const [formState, setFormState] = useState({
@@ -44,22 +44,21 @@ export default function ContactForm() {
     setError(null)
 
     try {
-      // Create a proxy URL to bypass CORS
-      const proxyUrl = "https://cors-anywhere.herokuapp.com/"
-
-      // Send JSON data to Google Sheets
-      const response = await fetch(GOOGLE_SHEETS_CONTACT_FORM_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formState),
+      // Create form data for submission
+      const formData = new FormData()
+      Object.entries(formState).forEach(([key, value]) => {
+        formData.append(key, value as string)
       })
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`)
-      }
+      // Submit to Google Sheets
+      const response = await fetch(GOOGLE_SHEETS_CONTACT_FORM_URL, {
+        method: "POST",
+        body: formData,
+        mode: "no-cors", // This is important for Google Sheets Web App
+      })
 
+      // Since we're using no-cors, we can't actually check the response status
+      // So we'll assume success if no error is thrown
       setIsSubmitting(false)
       setIsSubmitted(true)
 
@@ -77,60 +76,10 @@ export default function ContactForm() {
       }, 5000)
     } catch (error) {
       console.error("Error submitting form:", error)
-
-      // Fallback method using a hidden iframe
-      try {
-        // Create a hidden iframe
-        const iframe = document.createElement("iframe")
-        iframe.name = "hidden-iframe"
-        iframe.style.display = "none"
-        document.body.appendChild(iframe)
-
-        // Create a form that will post to the Google Script
-        const form = document.createElement("form")
-        form.method = "POST"
-        form.action = GOOGLE_SHEETS_CONTACT_FORM_URL
-        form.target = "hidden-iframe"
-
-        // Add a hidden input with the JSON data
-        const input = document.createElement("input")
-        input.type = "hidden"
-        input.name = "data"
-        input.value = JSON.stringify(formState)
-        form.appendChild(input)
-
-        // Submit the form
-        document.body.appendChild(form)
-        form.submit()
-
-        // Clean up
-        setTimeout(() => {
-          document.body.removeChild(form)
-          document.body.removeChild(iframe)
-        }, 1000)
-
-        setIsSubmitting(false)
-        setIsSubmitted(true)
-
-        // Reset form after showing success message
-        setTimeout(() => {
-          setIsSubmitted(false)
-          setFormState({
-            name: "",
-            email: "",
-            phone: "",
-            company: "",
-            service: "",
-            message: "",
-          })
-        }, 5000)
-      } catch (fallbackError) {
-        console.error("Fallback method also failed:", fallbackError)
-        setIsSubmitting(false)
-        setError(
-          "There was an error submitting your message. Please try again or contact us directly at thebagaboo@gmail.com",
-        )
-      }
+      setIsSubmitting(false)
+      setError(
+        "There was an error submitting your message. Please try again or contact us directly at thebagaboo@gmail.com",
+      )
     }
   }
 
