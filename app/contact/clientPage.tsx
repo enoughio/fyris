@@ -129,7 +129,7 @@ function FAQ() {
     {
       question: "What services does Fyris offer?",
       answer:
-        "Fyris offers a wide range of services including custom web development, AI & automation solutions, cloud & DevOps consulting, mobile app development, and cybersecurity & blockchain services.",
+        "Fyris offers a wide range of services including Custom Software, AI & automation solutions, cloud & DevOps consulting, mobile app development, and cybersecurity & blockchain services.",
     },
     {
       question: "How long does a typical project take?",

@@ -182,12 +182,12 @@ export default function ContactForm() {
               <label htmlFor="service" className="text-sm font-medium text-gray-300">
                 Service You're Interested In
               </label>
-              <Select value={formState.service} onValueChange={handleSelectChange}>
-                <SelectTrigger className="bg-gray-900/50 border-gray-700 focus:border-purple-500">
+              <Select name="service" value={formState.service} onValueChange={handleSelectChange}>
+                <SelectTrigger  className="bg-gray-900/50 border-gray-700 focus:border-purple-500">
                   <SelectValue placeholder="Select a service" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="web-development">Custom Web Development</SelectItem>
+                  <SelectItem value="web-development">Custom Software</SelectItem>
                   <SelectItem value="ai-automation">AI & Automation Solutions</SelectItem>
                   <SelectItem value="cloud-devops">Cloud & DevOps Consulting</SelectItem>
                   <SelectItem value="mobile-apps">Mobile App Development</SelectItem>

@@ -148,7 +148,7 @@ export default function ClientPage() {
                 </h2>
                 <p className="text-xl text-gray-300 mb-6">
                   Let's collaborate to build innovative solutions that drive growth and efficiency for your business in
-                  Bhopal and beyond.
+                  India and beyond.
                 </p>
                 <ul className="space-y-3 mb-8">
                   {[
