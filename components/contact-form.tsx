@@ -13,7 +13,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 // Google Sheets Web App URL - kept as a constant to protect it
 const GOOGLE_SHEETS_CONTACT_FORM_URL =
- "https://script.google.com/macros/s/AKfycbx4wxcqfRYXmVZ_mPSZheBDZkhg1H5TOeuRa1URExFfnCaBXsdjeBjfRXUd8AFFL15JAg/exec"
+"https://script.google.com/macros/s/AKfycbyPKeC7QD3w7powPoZIPUp0sXULsXaFPYyMEeu3B8M/dev"
 
 export default function ContactForm() {
   const [formState, setFormState] = useState({
@@ -56,6 +56,10 @@ export default function ContactForm() {
         body: formData,
         mode: "no-cors", // This is important for Google Sheets Web App
       })
+
+      if(!response.ok) {
+        throw new Error("Network response was not ok")
+      }
 
       // Since we're using no-cors, we can't actually check the response status
       // So we'll assume success if no error is thrown
