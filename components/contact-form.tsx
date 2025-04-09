@@ -14,8 +14,6 @@ import { addRegistration } from "@/lib/actions.js" // Adjust the import path as 
 import { Content } from "next/font/google"
 
 // Google Sheets Web App URL - kept as a constant to protect it
-const GOOGLE_SHEETS_CONTACT_FORM_URL =
-"https://script.google.com/macros/s/AKfycbyPKeC7QD3w7powPoZIPUp0sXULsXaFPYyMEeu3B8M/dev"
 
 export default function ContactForm() {
   const [formState, setFormState] = useState({
