@@ -1,25 +1,14 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
-import { ChevronRight, ArrowRight } from "lucide-react"
+import { ChevronRight, ArrowRight, Search, Filter, X, ExternalLink, Code, Layers, Zap, CheckCircle } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
-
-interface Project {
-  id: string
-  title: string
-  category: string
-  description: string
-  fullDescription: string
-  image: string
-  technologies: string[]
-  features: string[]
-  client: string
-  year: string
-  link?: string
-}
+import { Input } from "@/components/ui/input"
+import { portfolioProjects } from "./portfolio-data"
+import type { Project } from "./portfolio-data"
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const [isHovered, setIsHovered] = useState(false)
@@ -121,7 +110,7 @@ function FeaturedProject({ project }: { project: Project }) {
           </div>
 
           <Button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white">
-            View Project
+            View Case Study
             <ChevronRight className="ml-2 h-5 w-5" />
           </Button>
         </div>
@@ -130,128 +119,36 @@ function FeaturedProject({ project }: { project: Project }) {
   )
 }
 
-interface Project {
-  id: string
-  title: string
-  category: string
-  description: string
-  fullDescription: string
-  image: string
-  technologies: string[]
-  features: string[]
-  client: string
-  year: string
-  link?: string
-}
-
 export default function PortfolioClientPage() {
   const router = useRouter()
   const [filter, setFilter] = useState("all")
+  const [searchQuery, setSearchQuery] = useState("")
+  const [isFilterMenuOpen, setIsFilterMenuOpen] = useState(false)
   const horizontalRef = useRef<HTMLDivElement>(null)
 
-  const projects: Project[] = [
-    {
-      id: "e-commerce",
-      title: "E-commerce Website",
-      category: "Web Development",
-      description: "A modern e-commerce website with a user-friendly interface and secure payment processing.",
-      fullDescription:
-        "We developed a modern e-commerce website for a local retail business in Bhopal. The solution features a user-friendly interface, secure payment processing, and a responsive design that works seamlessly across all devices.",
-      image: "/placeholder.svg?height=400&width=600",
-      technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-      features: [
-        "Product catalog with search and filtering",
-        "User accounts and order history",
-        "Secure payment processing",
-        "Admin dashboard for inventory management",
-        "Responsive design for all devices",
-      ],
-      client: "Bhopal Retail Group",
-      year: "2023",
-    },
-    {
-      id: "clinic-management",
-      title: "Clinic Management System",
-      category: "Web Application",
-      description: "A simple but effective clinic management system for a local healthcare provider.",
-      fullDescription:
-        "We built a clinic management system for a healthcare provider in Madhya Pradesh. The system includes appointment scheduling, patient records management, and billing features. We implemented security measures to protect sensitive patient data.",
-      image: "/placeholder.svg?height=400&width=600",
-      technologies: ["React", "Node.js", "PostgreSQL"],
-      features: [
-        "Appointment scheduling",
-        "Patient records management",
-        "Billing and invoicing",
-        "Prescription management",
-        "Reporting and analytics",
-      ],
-      client: "MP Healthcare",
-      year: "2023",
-    },
-    {
-      id: "learning-platform",
-      title: "Educational Learning Platform",
-      category: "Web Development",
-      description: "An online learning platform for a local educational institution.",
-      fullDescription:
-        "We developed an online learning platform for an educational institution in Bhopal. The platform includes course management, video lectures, quizzes, and progress tracking features. The solution has helped the client expand their reach beyond physical classrooms.",
-      image: "/placeholder.svg?height=400&width=600",
-      technologies: ["React", "Node.js", "MongoDB"],
-      features: [
-        "Course management",
-        "Video lectures",
-        "Interactive quizzes",
-        "Progress tracking",
-        "Discussion forums",
-      ],
-      client: "Bhopal Educational Institute",
-      year: "2023",
-    },
-    {
-      id: "portfolio-website",
-      title: "Portfolio Website",
-      category: "Web Development",
-      description: "A professional portfolio website for a local photographer.",
-      fullDescription:
-        "We created a stunning portfolio website for a photographer in Bhopal. The website showcases their work in a visually appealing way with a focus on image quality and loading speed. The responsive design ensures a great experience on all devices.",
-      image: "/placeholder.svg?height=400&width=600",
-      technologies: ["React", "Next.js", "Tailwind CSS"],
-      features: [
-        "Image gallery with filtering",
-        "Contact form",
-        "Blog section",
-        "SEO optimization",
-        "Fast loading times",
-      ],
-      client: "Bhopal Photography",
-      year: "2023",
-    },
-    {
-      id: "restaurant-website",
-      title: "Restaurant Website",
-      category: "Web Development",
-      description: "A website for a local restaurant with online ordering capabilities.",
-      fullDescription:
-        "We built a website for a restaurant in Madhya Pradesh that allows customers to view the menu, make reservations, and place orders online. The solution has helped the client increase their online presence and streamline their ordering process.",
-      image: "/placeholder.svg?height=400&width=600",
-      technologies: ["React", "Node.js", "MongoDB"],
-      features: ["Online menu", "Reservation system", "Online ordering", "Customer reviews", "Admin dashboard"],
-      client: "MP Cuisine",
-      year: "2023",
-    },
-  ]
+  // Filter projects based on search query and category filter
+  const filteredProjects = portfolioProjects.filter((project) => {
+    // Apply search filter
+    if (searchQuery) {
+      const searchLower = searchQuery.toLowerCase()
+      return (
+        project.title.toLowerCase().includes(searchLower) ||
+        project.description.toLowerCase().includes(searchLower) ||
+        project.technologies.some((tech) => tech.toLowerCase().includes(searchLower)) ||
+        project.category.toLowerCase().includes(searchLower)
+      )
+    }
 
-  const filteredProjects =
-    filter === "all"
-      ? projects
-      : projects.filter((project) => project.category.toLowerCase().includes(filter.toLowerCase()))
+    // Apply category filter
+    if (filter === "all") return true
+    return project.category.toLowerCase().includes(filter.toLowerCase())
+  })
 
-  const categories = [
-    { value: "all", label: "All Projects" },
-    { value: "web", label: "Web Development" },
-    { value: "application", label: "Web Application" },
-    { value: "mobile", label: "Mobile Apps" },
-  ]
+  // Get featured projects
+  const featuredProjects = portfolioProjects.filter((project) => project.isFeatured)
+
+  // Get unique categories for filter
+  const categories = ["all", ...new Set(portfolioProjects.map((project) => project.category.toLowerCase()))]
 
   // Horizontal scroll with mouse wheel
   useEffect(() => {
@@ -276,6 +173,30 @@ export default function PortfolioClientPage() {
       <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950" />
 
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          {Array.from({ length: 30 }).map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-20 bg-gradient-to-b from-purple-500/20 to-transparent"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                rotate: `${Math.random() * 45}deg`,
+              }}
+              animate={{
+                opacity: [0.2, 0.5, 0.2],
+                height: [80, 120, 80],
+              }}
+              transition={{
+                duration: 3 + Math.random() * 5,
+                repeat: Number.POSITIVE_INFINITY,
+                repeatType: "reverse",
+              }}
+            />
+          ))}
+        </div>
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -287,64 +208,141 @@ export default function PortfolioClientPage() {
               <span className="gradient-text">Our Portfolio</span>
             </h1>
             <p className="text-xl text-gray-300 mb-8">
-              Though we're a new agency, we've already delivered some impressive results for our clients. Here are a few
-              of our recent projects.
+              Explore our case studies and discover how we've helped businesses transform their digital presence with
+              innovative solutions.
             </p>
+
+            <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
+              <div className="relative flex-1 max-w-md mx-auto sm:mx-0">
+                <Input
+                  type="text"
+                  placeholder="Search projects..."
+                  className="bg-gray-900/50 border-gray-700 focus:border-purple-500 pl-10 py-6"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                {searchQuery && (
+                  <button
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+                    onClick={() => setSearchQuery("")}
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                )}
+              </div>
+
+              <div className="relative">
+                <Button
+                  variant="outline"
+                  className="border-gray-700 text-gray-300 hover:text-white hover:border-purple-500 py-6 px-4"
+                  onClick={() => setIsFilterMenuOpen(!isFilterMenuOpen)}
+                >
+                  <Filter className="mr-2 h-5 w-5" />
+                  Filter by Category
+                </Button>
+
+                <AnimatePresence>
+                  {isFilterMenuOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute right-0 mt-2 w-64 bg-gray-900 border border-gray-800 rounded-lg shadow-lg z-50"
+                    >
+                      <div className="p-2">
+                        {categories.map((category) => (
+                          <button
+                            key={category}
+                            className={`w-full text-left px-4 py-2 rounded-md transition-colors ${
+                              filter === category ? "bg-purple-600 text-white" : "text-gray-300 hover:bg-gray-800"
+                            }`}
+                            onClick={() => {
+                              setFilter(category)
+                              setIsFilterMenuOpen(false)
+                            }}
+                          >
+                            {category.charAt(0).toUpperCase() + category.slice(1)}
+                          </button>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Featured Project */}
-      <section className="py-10">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-white mb-6">Featured Project</h2>
-          <FeaturedProject project={projects[0]} />
-        </div>
-      </section>
+      {/* Featured Projects */}
+      {featuredProjects.length > 0 && !searchQuery && filter === "all" && (
+        <section className="py-10">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+              <Zap className="mr-2 h-5 w-5 text-purple-500" />
+              Featured Projects
+            </h2>
+            <div className="space-y-8">
+              {featuredProjects.map((project, index) => (
+                <FeaturedProject key={project.id} project={project} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Horizontal Scroll Portfolio */}
-      <section className="py-20 bg-gradient-to-b from-gray-950 to-gray-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
-            <h2 className="text-2xl font-bold text-white mb-4 md:mb-0">Our Projects</h2>
-            <p className="text-gray-400 flex items-center">
-              <span>Scroll horizontally to explore</span>
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </p>
-          </div>
+      {!searchQuery && filter === "all" && (
+        <section className="py-20 bg-gradient-to-b from-gray-950 to-gray-900">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
+              <h2 className="text-2xl font-bold text-white mb-4 md:mb-0 flex items-center">
+                <Layers className="mr-2 h-5 w-5 text-purple-500" />
+                Recent Projects
+              </h2>
+              <p className="text-gray-400 flex items-center">
+                <span>Scroll horizontally to explore</span>
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </p>
+            </div>
 
-          <div ref={horizontalRef} className="horizontal-scroll pb-8 -mx-4 px-4 cursor-grab active:cursor-grabbing">
-            {projects.map((project, index) => (
-              <div key={project.id} className="min-w-[300px] sm:min-w-[350px] md:min-w-[400px] mr-6">
-                <ProjectCard project={project} index={index} />
-              </div>
-            ))}
+            <div ref={horizontalRef} className="horizontal-scroll pb-8 -mx-4 px-4 cursor-grab active:cursor-grabbing">
+              {portfolioProjects
+                .filter((p) => !p.isFeatured)
+                .map((project, index) => (
+                  <div key={project.id} className="min-w-[300px] sm:min-w-[350px] md:min-w-[400px] mr-6">
+                    <ProjectCard project={project} index={index} />
+                  </div>
+                ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* All Projects */}
+      {/* All Projects Grid */}
       <section className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
-            <h2 className="text-2xl font-bold text-white mb-4 md:mb-0">All Projects</h2>
+            <h2 className="text-2xl font-bold text-white mb-4 md:mb-0 flex items-center">
+              <Code className="mr-2 h-5 w-5 text-purple-500" />
+              {searchQuery || filter !== "all" ? "Filtered Projects" : "All Projects"}
+            </h2>
 
-            <div className="flex flex-wrap gap-2">
-              {categories.map((category) => (
-                <Button
-                  key={category.value}
-                  variant={filter === category.value ? "default" : "outline"}
-                  className={
-                    filter === category.value
-                      ? "bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
-                      : "border-gray-700 text-gray-300 hover:text-white hover:border-purple-500"
-                  }
-                  onClick={() => setFilter(category.value)}
-                >
-                  {category.label}
-                </Button>
-              ))}
-            </div>
+            {(searchQuery || filter !== "all") && (
+              <Button
+                variant="outline"
+                className="border-gray-700 text-gray-300 hover:text-white hover:border-purple-500"
+                onClick={() => {
+                  setSearchQuery("")
+                  setFilter("all")
+                }}
+              >
+                <X className="mr-2 h-5 w-5" />
+                Clear Filters
+              </Button>
+            )}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -355,15 +353,92 @@ export default function PortfolioClientPage() {
 
           {filteredProjects.length === 0 && (
             <div className="text-center py-12 glass-card">
-              <p className="text-gray-400 text-lg mb-4">No projects found in this category at the moment.</p>
+              <p className="text-gray-400 text-lg mb-4">No projects found matching your criteria.</p>
               <Button
-                onClick={() => setFilter("all")}
+                onClick={() => {
+                  setSearchQuery("")
+                  setFilter("all")
+                }}
                 className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
               >
                 View All Projects
               </Button>
             </div>
           )}
+        </div>
+      </section>
+
+      {/* Process Section */}
+      <section className="py-20 bg-gradient-to-b from-gray-950 to-gray-900">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <span className="gradient-text">Our Project Process</span>
+            </h2>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              We follow a structured approach to ensure successful project delivery and client satisfaction.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                number: "01",
+                title: "Discovery",
+                description:
+                  "We start by understanding your business, goals, and requirements through in-depth discussions.",
+                icon: <Search className="h-8 w-8 text-white" />,
+              },
+              {
+                number: "02",
+                title: "Planning",
+                description:
+                  "We create a detailed project plan, including timelines, milestones, and resource allocation.",
+                icon: <Layers className="h-8 w-8 text-white" />,
+              },
+              {
+                number: "03",
+                title: "Development",
+                description:
+                  "Our team builds your solution using agile methodologies with regular updates and feedback.",
+                icon: <Code className="h-8 w-8 text-white" />,
+              },
+              {
+                number: "04",
+                title: "Delivery",
+                description: "We deploy your solution and provide ongoing support and maintenance as needed.",
+                icon: <CheckCircle className="h-8 w-8 text-white" />,
+              },
+            ].map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="glass-card p-6 relative overflow-hidden"
+              >
+                {/* Step number */}
+                <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center">
+                  <span className="text-white font-bold">{step.number}</span>
+                </div>
+
+                <div className="text-center pt-4">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-800/50 flex items-center justify-center">
+                    {step.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2">{step.title}</h3>
+                  <p className="text-gray-400">{step.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -384,16 +459,26 @@ export default function PortfolioClientPage() {
                   <span className="gradient-text">Ready to Build Your Next Project?</span>
                 </h2>
                 <p className="text-xl text-gray-300 mb-8">
-                  We may be new, but we're passionate, innovative, and ready to bring your ideas to life.
+                  Let's collaborate to create innovative solutions that drive your business forward.
                 </p>
 
-                <Button
-                  onClick={() => router.push("/contact")}
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-6 text-lg"
-                >
-                  Start a Project
-                  <ChevronRight className="ml-2 h-5 w-5" />
-                </Button>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button
+                    onClick={() => router.push("/contact")}
+                    className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-6 text-lg"
+                  >
+                    Start a Project
+                    <ChevronRight className="ml-2 h-5 w-5" />
+                  </Button>
+                  <Button
+                    onClick={() => router.push("/services")}
+                    variant="outline"
+                    className="border-purple-500/50 hover:border-purple-500 text-white px-8 py-6 text-lg"
+                  >
+                    Explore Our Services
+                    <ExternalLink className="ml-2 h-5 w-5" />
+                  </Button>
+                </div>
               </motion.div>
             </div>
           </div>

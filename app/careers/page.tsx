@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
-import CareersPage from "./clientPage";
+// import CareersPage from "./clientPage";
+import CareersClientPage from "./CareersClientPage";
 
 export const metadata: Metadata = {
   title: "Careers - Join Our Team at Fyris | Software Development Agency",
@@ -28,6 +29,6 @@ export const metadata: Metadata = {
 
 export default function Page(){
   return (
-    <CareersPage />
+    <CareersClientPage />
   )
 }
