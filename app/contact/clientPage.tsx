@@ -27,17 +27,17 @@ const OfficeLocations = () => {
   const offices: Offices = {
     bhopal: {
       name: "Bhopal (Headquarters)",
-      address: "MP Nagar, Zone I, Bhopal, Madhya Pradesh 462011",
+      address: "254 E-2 Arera, Colony, Bhopal, Madhya Pradesh 462011",
       phone: "+91 9993553513",
-      email: "thebagaboo@gmail.com",
+      email: "contact@fyris.in",
       hours: "Monday - Friday: 9:00 AM - 6:00 PM",
-      mapUrl: "https://maps.google.com/?q=MP+Nagar+Bhopal",
+      mapUrl: "https://maps.google.com/?q=254+E-2+Arera+Bhopal",
     },
     // indore: {
     //   name: "Indore Office",
     //   address: "456 Vijay Nagar, Indore, Madhya Pradesh 452010",
     //   phone: "+91 9993553513",
-    //   email: "thebagaboo@gmail.com",
+ 
     //   hours: "Monday - Friday: 9:00 AM - 6:00 PM",
     //   mapUrl: "https://maps.google.com/?q=Vijay+Nagar+Indore",
     // },
@@ -45,7 +45,7 @@ const OfficeLocations = () => {
     //   name: "Delhi Office",
     //   address: "789 Connaught Place, New Delhi 110001",
     //   phone: "+91 9993553513",
-    //   email: "thebagaboo@gmail.com",
+    //   email: 
     //   hours: "Monday - Friday: 9:30 AM - 6:30 PM",
     //   mapUrl: "https://maps.google.com/?q=Connaught+Place+Delhi",
     // },

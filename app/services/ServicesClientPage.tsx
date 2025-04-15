@@ -2,8 +2,8 @@
 
 import type React from "react"
 
-import { useRef } from "react"
-import { motion, useInView } from "framer-motion"
+import { useState, useRef } from "react"
+import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 import {
@@ -19,7 +19,7 @@ import {
   BarChart,
 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import ServiceDetailModal from "@/components/service-detail-modal"
 
 // Service Card Component
 function ServiceCard({
@@ -28,21 +28,23 @@ function ServiceCard({
   icon,
   features,
   index,
+  onViewDetails,
 }: {
   title: string
   description: string
   icon: React.ReactNode
   features: string[]
   index: number
+  onViewDetails: () => void
 }) {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
     <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 50 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="glass-card p-6 h-full relative overflow-hidden"
     >
@@ -55,17 +57,27 @@ function ServiceCard({
       <p className="text-gray-400 mb-6">{description}</p>
 
       <div className="space-y-2 mb-6">
-        {features.map((feature, i) => (
+        {features.slice(0, 3).map((feature, i) => (
           <div key={i} className="flex items-start">
             <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
             <span className="text-gray-300">{feature}</span>
           </div>
         ))}
+        {features.length > 3 && (
+          <div className="flex items-start">
+            <span className="text-gray-300">+{features.length - 3} more features</span>
+          </div>
+        )}
       </div>
 
-      <div className="absolute bottom-6 right-6">
-        <ArrowRight className="h-5 w-5 text-purple-500" />
-      </div>
+      <Button
+        variant="outline"
+        className="w-full border-purple-500/50 hover:border-purple-500 text-white"
+        onClick={onViewDetails}
+      >
+        More Details
+        <ArrowRight className="ml-2 h-5 w-5" />
+      </Button>
     </motion.div>
   )
 }
@@ -181,6 +193,7 @@ function ProcessStep({
 
 export default function ServicesClientPage() {
   const router = useRouter()
+  const [activeService, setActiveService] = useState<string | null>(null)
 
   // Services data
   const services = [
@@ -195,7 +208,20 @@ export default function ServicesClientPage() {
         "Content management systems",
         "E-commerce functionality",
         "Performance optimization",
+        "Progressive Web Apps (PWAs)",
+        "API integration",
+        "Accessibility compliance",
       ],
+      longDescription:
+        "Our web development services focus on creating custom, high-performance websites and web applications that align with your business goals. We use modern technologies and best practices to ensure your website is fast, secure, and user-friendly across all devices. From simple informational sites to complex web applications, we have the expertise to bring your vision to life.",
+      benefits: [
+        "Increased online visibility and brand awareness",
+        "Improved user engagement and conversion rates",
+        "Enhanced customer experience and satisfaction",
+        "Streamlined business processes and operations",
+        "Scalable solutions that grow with your business",
+      ],
+      technologies: ["React", "Next.js", "Node.js", "WordPress", "Shopify", "Laravel", "MongoDB", "PostgreSQL"],
     },
     {
       id: "mobile-apps",
@@ -208,7 +234,20 @@ export default function ServicesClientPage() {
         "UI/UX design",
         "App Store submission",
         "Maintenance and updates",
+        "Push notifications",
+        "Offline functionality",
+        "Analytics integration",
       ],
+      longDescription:
+        "We develop high-quality mobile applications for iOS and Android platforms that provide seamless user experiences and drive business growth. Whether you need a native app for maximum performance or a cross-platform solution for broader reach, our team has the expertise to deliver mobile solutions that meet your specific requirements.",
+      benefits: [
+        "Reach users on their preferred devices",
+        "Enhance customer engagement and loyalty",
+        "Create new revenue streams",
+        "Improve business processes and efficiency",
+        "Gather valuable user data and insights",
+      ],
+      technologies: ["React Native", "Flutter", "Swift", "Kotlin", "Firebase", "AWS Amplify", "GraphQL", "Redux"],
     },
     {
       id: "e-commerce",
@@ -221,6 +260,28 @@ export default function ServicesClientPage() {
         "Inventory management",
         "Order processing",
         "Customer accounts",
+        "Discount and promotion tools",
+        "Multi-currency support",
+        "Shipping integration",
+      ],
+      longDescription:
+        "Our e-commerce solutions enable businesses to sell products and services online with confidence. We build secure, scalable online stores that provide excellent shopping experiences for your customers and powerful management tools for your team. From product catalog management to secure checkout processes, we handle all aspects of e-commerce development.",
+      benefits: [
+        "Expand your market reach beyond physical locations",
+        "Sell products 24/7 without staffing limitations",
+        "Reduce operational costs compared to physical stores",
+        "Gather customer data for personalized marketing",
+        "Scale your business more efficiently",
+      ],
+      technologies: [
+        "Shopify",
+        "WooCommerce",
+        "Magento",
+        "Stripe",
+        "PayPal",
+        "Square",
+        "BigCommerce",
+        "Custom solutions",
       ],
     },
     {
@@ -234,6 +295,28 @@ export default function ServicesClientPage() {
         "Process automation",
         "Predictive analytics",
         "Machine learning integration",
+        "Natural language processing",
+        "Computer vision solutions",
+        "Recommendation systems",
+      ],
+      longDescription:
+        "Our AI and automation services help businesses leverage artificial intelligence to streamline operations, gain valuable insights from data, and enhance customer experiences. We develop custom AI solutions that address specific business challenges, from intelligent chatbots that improve customer service to predictive analytics that inform strategic decisions.",
+      benefits: [
+        "Automate repetitive tasks to free up human resources",
+        "Gain deeper insights from your business data",
+        "Improve decision-making with predictive analytics",
+        "Enhance customer experiences with personalization",
+        "Stay ahead of competitors with cutting-edge technology",
+      ],
+      technologies: [
+        "TensorFlow",
+        "PyTorch",
+        "OpenAI API",
+        "Google Cloud AI",
+        "Azure Cognitive Services",
+        "AWS SageMaker",
+        "Scikit-learn",
+        "NLTK",
       ],
     },
     {
@@ -247,7 +330,20 @@ export default function ServicesClientPage() {
         "Serverless applications",
         "Scalability optimization",
         "Cost management",
+        "Disaster recovery",
+        "Security implementation",
+        "Performance monitoring",
       ],
+      longDescription:
+        "Our cloud services help businesses leverage the power of cloud computing to improve scalability, reliability, and cost-efficiency. We assist with cloud migration, infrastructure setup, and ongoing management to ensure your applications and data are secure, accessible, and optimized for performance. Our expertise spans major cloud platforms including AWS, Azure, and Google Cloud.",
+      benefits: [
+        "Reduce infrastructure costs with pay-as-you-go models",
+        "Scale resources up or down based on demand",
+        "Improve reliability and uptime for critical applications",
+        "Enhance security with modern cloud security practices",
+        "Enable remote work and collaboration",
+      ],
+      technologies: ["AWS", "Azure", "Google Cloud", "Docker", "Kubernetes", "Terraform", "CloudFormation", "Ansible"],
     },
     {
       id: "digital-marketing",
@@ -260,6 +356,28 @@ export default function ServicesClientPage() {
         "Email campaigns",
         "Analytics and reporting",
         "Conversion optimization",
+        "PPC advertising",
+        "Content creation",
+        "Brand development",
+      ],
+      longDescription:
+        "Our digital marketing services help businesses increase their online visibility, attract qualified leads, and convert them into customers. We develop comprehensive digital marketing strategies that include search engine optimization, content marketing, social media management, email campaigns, and paid advertising. Our data-driven approach ensures measurable results and continuous improvement.",
+      benefits: [
+        "Increase website traffic and online visibility",
+        "Generate more qualified leads for your business",
+        "Improve conversion rates and ROI on marketing spend",
+        "Build brand awareness and customer loyalty",
+        "Gain insights into customer behavior and preferences",
+      ],
+      technologies: [
+        "Google Analytics",
+        "SEMrush",
+        "Ahrefs",
+        "Mailchimp",
+        "HubSpot",
+        "Google Ads",
+        "Facebook Ads",
+        "LinkedIn Ads",
       ],
     },
   ]
@@ -437,6 +555,7 @@ export default function ServicesClientPage() {
                 icon={service.icon}
                 features={service.features}
                 index={index}
+                onViewDetails={() => setActiveService(service.id)}
               />
             ))}
           </div>
@@ -495,378 +614,8 @@ export default function ServicesClientPage() {
         </div>
       </section>
 
-      {/* Service Details Tabs Section */}
-      <section className="py-20 bg-gradient-to-b from-gray-900 to-gray-950">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-cyan-400 to-blue-400">
-                Our Expertise
-              </span>
-            </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              Explore our services in detail and discover how we can help your business grow.
-            </p>
-          </motion.div>
-
-          <Tabs defaultValue="web" className="w-full">
-            <TabsList className="grid grid-cols-3 lg:grid-cols-6 mb-8">
-              <TabsTrigger value="web" className="data-[state=active]:bg-gradient-to-r from-purple-600 to-blue-600">
-                <Globe className="h-5 w-5 mr-2" />
-                Web
-              </TabsTrigger>
-              <TabsTrigger value="mobile" className="data-[state=active]:bg-gradient-to-r from-purple-600 to-blue-600">
-                <Smartphone className="h-5 w-5 mr-2" />
-                Mobile
-              </TabsTrigger>
-              <TabsTrigger
-                value="ecommerce"
-                className="data-[state=active]:bg-gradient-to-r from-purple-600 to-blue-600"
-              >
-                <ShoppingCart className="h-5 w-5 mr-2" />
-                E-Commerce
-              </TabsTrigger>
-              <TabsTrigger value="ai" className="data-[state=active]:bg-gradient-to-r from-purple-600 to-blue-600">
-                <Brain className="h-5 w-5 mr-2" />
-                AI
-              </TabsTrigger>
-              <TabsTrigger value="cloud" className="data-[state=active]:bg-gradient-to-r from-purple-600 to-blue-600">
-                <Cloud className="h-5 w-5 mr-2" />
-                Cloud
-              </TabsTrigger>
-              <TabsTrigger
-                value="marketing"
-                className="data-[state=active]:bg-gradient-to-r from-purple-600 to-blue-600"
-              >
-                <BarChart className="h-5 w-5 mr-2" />
-                Marketing
-              </TabsTrigger>
-            </TabsList>
-
-            <div className="glass-card p-8 rounded-lg">
-              <TabsContent value="web">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                  <div>
-                    <h3 className="text-2xl font-bold text-white mb-4">Web Development</h3>
-                    <p className="text-gray-300 mb-6">
-                      We create stunning, responsive websites and web applications that deliver exceptional user
-                      experiences and drive business growth. Our web development services are tailored to meet your
-                      specific needs and goals.
-                    </p>
-
-                    <div className="space-y-3 mb-6">
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Custom website design and development</span>
-                      </div>
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Responsive design for all devices</span>
-                      </div>
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Content management systems (WordPress, etc.)</span>
-                      </div>
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Web application development</span>
-                      </div>
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Performance optimization</span>
-                      </div>
-                    </div>
-
-                    <Button
-                      onClick={() => router.push("/contact")}
-                      className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
-                    >
-                      Discuss Your Project
-                      <ChevronRight className="ml-2 h-5 w-5" />
-                    </Button>
-                  </div>
-
-                  <div className="hidden lg:block">
-                    <img
-                      src="/placeholder.svg?height=400&width=600"
-                      alt="Web Development"
-                      className="rounded-lg shadow-lg"
-                    />
-                  </div>
-                </div>
-              </TabsContent>
-
-              <TabsContent value="mobile">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                  <div>
-                    <h3 className="text-2xl font-bold text-white mb-4">Mobile App Development</h3>
-                    <p className="text-gray-300 mb-6">
-                      We develop high-performance, feature-rich mobile applications for iOS and Android platforms that
-                      engage users and drive business growth. Our mobile apps are designed with user experience and
-                      performance in mind.
-                    </p>
-
-                    <div className="space-y-3 mb-6">
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Native iOS and Android development</span>
-                      </div>
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Cross-platform development (React Native)</span>
-                      </div>
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">UI/UX design for mobile</span>
-                      </div>
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">App Store and Google Play submission</span>
-                      </div>
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">App maintenance and updates</span>
-                      </div>
-                    </div>
-
-                    <Button
-                      onClick={() => router.push("/contact")}
-                      className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
-                    >
-                      Discuss Your Project
-                      <ChevronRight className="ml-2 h-5 w-5" />
-                    </Button>
-                  </div>
-
-                  <div className="hidden lg:block">
-                    <img
-                      src="/placeholder.svg?height=400&width=600"
-                      alt="Mobile App Development"
-                      className="rounded-lg shadow-lg"
-                    />
-                  </div>
-                </div>
-              </TabsContent>
-
-              {/* Add similar TabsContent for other tabs */}
-              <TabsContent value="ecommerce">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                  <div>
-                    <h3 className="text-2xl font-bold text-white mb-4">E-Commerce Solutions</h3>
-                    <p className="text-gray-300 mb-6">
-                      We build powerful e-commerce platforms that help businesses sell products and services online. Our
-                      solutions are designed to provide a seamless shopping experience and maximize conversions.
-                    </p>
-
-                    <div className="space-y-3 mb-6">
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Custom e-commerce website development</span>
-                      </div>
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Shopping cart and checkout optimization</span>
-                      </div>
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Payment gateway integration</span>
-                      </div>
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Inventory and order management</span>
-                      </div>
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Product catalog management</span>
-                      </div>
-                    </div>
-
-                    <Button
-                      onClick={() => router.push("/contact")}
-                      className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
-                    >
-                      Discuss Your Project
-                      <ChevronRight className="ml-2 h-5 w-5" />
-                    </Button>
-                  </div>
-
-                  <div className="hidden lg:block">
-                    <img
-                      src="/placeholder.svg?height=400&width=600"
-                      alt="E-Commerce Solutions"
-                      className="rounded-lg shadow-lg"
-                    />
-                  </div>
-                </div>
-              </TabsContent>
-
-              <TabsContent value="ai">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                  <div>
-                    <h3 className="text-2xl font-bold text-white mb-4">AI & Automation</h3>
-                    <p className="text-gray-300 mb-6">
-                      We leverage artificial intelligence and automation to help businesses streamline processes, gain
-                      insights from data, and enhance customer experiences. Our AI solutions are designed to solve real
-                      business problems.
-                    </p>
-
-                    <div className="space-y-3 mb-6">
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Chatbots and virtual assistants</span>
-                      </div>
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Data analysis and visualization</span>
-                      </div>
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Business process automation</span>
-                      </div>
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Predictive analytics</span>
-                      </div>
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Machine learning integration</span>
-                      </div>
-                    </div>
-
-                    <Button
-                      onClick={() => router.push("/contact")}
-                      className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
-                    >
-                      Discuss Your Project
-                      <ChevronRight className="ml-2 h-5 w-5" />
-                    </Button>
-                  </div>
-
-                  <div className="hidden lg:block">
-                    <img
-                      src="/placeholder.svg?height=400&width=600"
-                      alt="AI & Automation"
-                      className="rounded-lg shadow-lg"
-                    />
-                  </div>
-                </div>
-              </TabsContent>
-
-              <TabsContent value="cloud">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                  <div>
-                    <h3 className="text-2xl font-bold text-white mb-4">Cloud Services</h3>
-                    <p className="text-gray-300 mb-6">
-                      We help businesses leverage the power of cloud computing to improve scalability, reliability, and
-                      cost-efficiency. Our cloud services are designed to optimize your infrastructure and applications.
-                    </p>
-
-                    <div className="space-y-3 mb-6">
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Cloud migration and strategy</span>
-                      </div>
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Infrastructure as Code (IaC)</span>
-                      </div>
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Serverless application development</span>
-                      </div>
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Cloud cost optimization</span>
-                      </div>
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">DevOps implementation</span>
-                      </div>
-                    </div>
-
-                    <Button
-                      onClick={() => router.push("/contact")}
-                      className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
-                    >
-                      Discuss Your Project
-                      <ChevronRight className="ml-2 h-5 w-5" />
-                    </Button>
-                  </div>
-
-                  <div className="hidden lg:block">
-                    <img
-                      src="/placeholder.svg?height=400&width=600"
-                      alt="Cloud Services"
-                      className="rounded-lg shadow-lg"
-                    />
-                  </div>
-                </div>
-              </TabsContent>
-
-              <TabsContent value="marketing">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                  <div>
-                    <h3 className="text-2xl font-bold text-white mb-4">Digital Marketing</h3>
-                    <p className="text-gray-300 mb-6">
-                      We help businesses increase their online visibility, attract more customers, and grow their
-                      revenue through effective digital marketing strategies. Our approach is data-driven and
-                      results-focused.
-                    </p>
-
-                    <div className="space-y-3 mb-6">
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Search Engine Optimization (SEO)</span>
-                      </div>
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Social media marketing</span>
-                      </div>
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Content marketing strategy</span>
-                      </div>
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Email marketing campaigns</span>
-                      </div>
-                      <div className="flex items-start">
-                        <Check className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">Analytics and performance tracking</span>
-                      </div>
-                    </div>
-
-                    <Button
-                      onClick={() => router.push("/contact")}
-                      className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
-                    >
-                      Discuss Your Project
-                      <ChevronRight className="ml-2 h-5 w-5" />
-                    </Button>
-                  </div>
-
-                  <div className="hidden lg:block">
-                    <img
-                      src="/placeholder.svg?height=400&width=600"
-                      alt="Digital Marketing"
-                      className="rounded-lg shadow-lg"
-                    />
-                  </div>
-                </div>
-              </TabsContent>
-            </div>
-          </Tabs>
-        </div>
-      </section>
-
       {/* Our Process Section */}
-      <section className="py-20">
+      <section className="py-20 bg-gradient-to-b from-gray-900 to-gray-950">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -962,6 +711,14 @@ export default function ServicesClientPage() {
           </div>
         </div>
       </section>
+
+      {/* Service Detail Modal */}
+      {activeService && (
+        <ServiceDetailModal
+          service={services.find((s) => s.id === activeService)!}
+          onClose={() => setActiveService(null)}
+        />
+      )}
     </div>
   )
 }

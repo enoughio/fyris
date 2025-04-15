@@ -1,12 +1,15 @@
 "use client"
 
+import type React from "react"
+
 import { motion } from "framer-motion"
+import { Search, PenTool, CodeIcon, Rocket } from "lucide-react"
 
 interface ProcessStepProps {
   number: string
   title: string
   description: string
-  icon: string
+  icon: React.ReactNode
   index: number
 }
 
@@ -24,7 +27,7 @@ function ProcessStep({ number, title, description, icon, index }: ProcessStepPro
         <span className="text-white font-bold">{number}</span>
       </div>
 
-      <div className="text-4xl mb-4 mt-4">{icon}</div>
+      <div className="text-4xl mb-4 mt-4 text-purple-400">{icon}</div>
       <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
       <p className="text-gray-400">{description}</p>
     </motion.div>
@@ -37,25 +40,25 @@ export default function ProcessSection() {
       number: "01",
       title: "Discovery",
       description: "We start by understanding your business, goals, and requirements through in-depth discussions.",
-      icon: "🔍",
+      icon: <Search className="h-10 w-10" />,
     },
     {
       number: "02",
       title: "Planning",
       description: "We create a detailed project plan, including timelines, milestones, and resource allocation.",
-      icon: "📝",
+      icon: <PenTool className="h-10 w-10" />,
     },
     {
       number: "03",
       title: "Development",
       description: "Our team builds your solution using agile methodologies with regular updates and feedback.",
-      icon: "💻",
+      icon: <CodeIcon className="h-10 w-10" />,
     },
     {
       number: "04",
       title: "Delivery",
       description: "We deploy your solution and provide ongoing support and maintenance as needed.",
-      icon: "🚀",
+      icon: <Rocket className="h-10 w-10" />,
     },
   ]
 

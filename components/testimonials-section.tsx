@@ -46,14 +46,14 @@ export default function TestimonialsSection() {
       position: "CTO",
       company: "TechSolutions Bhopal",
       testimonial:
-        "Fyris helped us create a modern website that perfectly represents our brand. Despite being a new agency, their team showed exceptional skill and dedication.",
+        "Ignivox helped us create a modern website that perfectly represents our brand. Despite being a new agency, their team showed exceptional skill and dedication.",
     },
     {
       name: "Priya Sharma",
       position: "CEO",
       company: "InnovateMP",
       testimonial:
-        "As a startup ourselves, we appreciated Fyris's fresh perspective and innovative approach. They delivered our mobile app on time and within budget.",
+        "As a startup ourselves, we appreciated Ignivox's fresh perspective and innovative approach. They delivered our mobile app on time and within budget.",
     },
     {
       name: "Amit Patel",

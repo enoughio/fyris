@@ -7,7 +7,7 @@ import { Code, Brain, Cloud, Smartphone, Shield } from "lucide-react"
 export default function ServicesOverview() {
   const services = [
     {
-      title: "Custom Software",
+      title: "Custom Web Development",
       description:
         "AI-powered, cloud-ready web applications built with cutting-edge technologies for optimal performance and scalability.",
       icon: <Code className="h-6 w-6 text-white" />,

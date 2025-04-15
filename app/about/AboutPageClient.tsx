@@ -60,7 +60,7 @@ function VisualTimeline() {
       color: "from-yellow-500 to-orange-500",
     },
     {
-      year: "2024",
+      year: "2025",
       quarter: "Q1",
       title: "Future Goals",
       description: "Setting our sights on expanding our client base and enhancing our service offerings.",
@@ -304,23 +304,48 @@ export default function AboutPageClient() {
   ]
 
   return (
-    <div className="pt-20">
-      {/* Updated Hero Section with 3D Elements and Particles */}
-      <section className="py-20 relative overflow-hidden">
+    <div className="pt-10">
+      {/* Redesigned Hero Section without images */}
+      <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950"></div>
 
-        {/* Animated particles background */}
+        {/* Abstract geometric shapes background */}
         <div className="absolute inset-0 overflow-hidden">
-          {Array.from({ length: 50 }).map((_, i) => (
+          {/* Large gradient circle */}
+          <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 rounded-full bg-gradient-to-r from-purple-900/10 to-blue-900/10 blur-3xl"></div>
+
+          {/* Animated lines */}
+          {Array.from({ length: 5 }).map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-2 h-2 rounded-full bg-purple-500/30"
+              className="absolute h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent"
+              style={{
+                top: `${20 + i * 15}%`,
+                left: 0,
+                right: 0,
+              }}
+              animate={{
+                opacity: [0.3, 0.8, 0.3],
+                scaleX: [0.7, 1, 0.7],
+              }}
+              transition={{
+                duration: 8 + i,
+                repeat: Number.POSITIVE_INFINITY,
+                repeatType: "reverse",
+              }}
+            />
+          ))}
+
+          {/* Animated dots */}
+          {Array.from({ length: 20 }).map((_, i) => (
+            <motion.div
+              key={`dot-${i}`}
+              className="absolute w-1 h-1 rounded-full bg-purple-500/50"
               style={{
                 top: `${Math.random() * 100}%`,
                 left: `${Math.random() * 100}%`,
               }}
               animate={{
-                y: [0, Math.random() * 30 - 15],
                 opacity: [0.2, 0.8, 0.2],
               }}
               transition={{
@@ -333,50 +358,47 @@ export default function AboutPageClient() {
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7 }}
-              className="text-center lg:text-left"
-            >
-              <Badge className="bg-gradient-to-r from-purple-600 to-blue-600 mb-4">Established 2022</Badge>
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+              <Badge className="bg-gradient-to-r from-purple-600 to-blue-600 mb-6">Established 2022</Badge>
 
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              <h1 className="text-5xl md:text-6xl font-bold mb-8 leading-tight">
                 <span className="text-white">We are </span>
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-cyan-400 to-blue-400">
                   Fyris
                 </span>
               </h1>
 
-              <p className="text-xl text-gray-300 mb-6">
+              <div className="h-1 w-32 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mb-8"></div>
+
+              <p className="text-xl md:text-2xl text-gray-300 mb-10 leading-relaxed">
                 A collective of creative minds and technical experts dedicated to transforming ideas into impactful
-                digital experiences.
+                digital experiences that drive business growth.
               </p>
 
-              <div className="flex flex-wrap gap-4 mb-8 justify-center lg:justify-start">
+              <div className="flex flex-wrap gap-6 justify-center mb-12">
                 <div className="flex items-center">
-                  <div className="w-2 h-2 rounded-full bg-purple-500 mr-2"></div>
-                  <span className="text-gray-300">Innovation-Driven</span>
+                  <div className="w-3 h-3 rounded-full bg-purple-500 mr-3"></div>
+                  <span className="text-gray-300 text-lg">Innovation-Driven</span>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
-                  <span className="text-gray-300">Client-Focused</span>
+                  <div className="w-3 h-3 rounded-full bg-blue-500 mr-3"></div>
+                  <span className="text-gray-300 text-lg">Client-Focused</span>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-2 h-2 rounded-full bg-cyan-500 mr-2"></div>
-                  <span className="text-gray-300">Quality-Obsessed</span>
+                  <div className="w-3 h-3 rounded-full bg-cyan-500 mr-3"></div>
+                  <span className="text-gray-300 text-lg">Quality-Obsessed</span>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-2 h-2 rounded-full bg-teal-500 mr-2"></div>
-                  <span className="text-gray-300">Future-Ready</span>
+                  <div className="w-3 h-3 rounded-full bg-teal-500 mr-3"></div>
+                  <span className="text-gray-300 text-lg">Future-Ready</span>
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+              <div className="flex flex-wrap gap-4 justify-center">
                 <Button
                   onClick={() => router.push("/contact")}
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
+                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-6 text-lg"
                 >
                   Get in Touch
                   <ChevronRight className="ml-2 h-5 w-5" />
@@ -385,124 +407,11 @@ export default function AboutPageClient() {
                 <Button
                   onClick={() => router.push("/portfolio")}
                   variant="outline"
-                  className="border-purple-500/50 hover:border-purple-500 text-white"
+                  className="border-purple-500/50 hover:border-purple-500 text-white px-8 py-6 text-lg"
                 >
                   View Our Work
                   <ChevronRight className="ml-2 h-5 w-5" />
                 </Button>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="relative"
-            >
-              {/* 3D-like layered elements */}
-              <div className="relative h-[400px] w-full">
-                {/* Background layer */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-purple-900/30 to-blue-900/30 rounded-lg"
-                  animate={{
-                    rotate: [0, 2, 0, -2, 0],
-                  }}
-                  transition={{
-                    duration: 8,
-                    repeat: Number.POSITIVE_INFINITY,
-                    repeatType: "reverse",
-                  }}
-                />
-
-                {/* Middle layer */}
-                <motion.div
-                  className="absolute inset-0 transform translate-x-4 translate-y-4 bg-gradient-to-br from-purple-800/20 to-blue-800/20 rounded-lg"
-                  animate={{
-                    rotate: [0, -2, 0, 2, 0],
-                    translateX: [16, 20, 16],
-                    translateY: [16, 12, 16],
-                  }}
-                  transition={{
-                    duration: 6,
-                    repeat: Number.POSITIVE_INFINITY,
-                    repeatType: "reverse",
-                  }}
-                />
-
-                {/* Foreground layer with image */}
-                <motion.div
-                  className="absolute inset-0 transform translate-x-8 translate-y-8 rounded-lg overflow-hidden glass"
-                  animate={{
-                    rotate: [0, 1, 0, -1, 0],
-                    translateX: [32, 28, 32],
-                    translateY: [32, 36, 32],
-                  }}
-                  transition={{
-                    duration: 7,
-                    repeat: Number.POSITIVE_INFINITY,
-                    repeatType: "reverse",
-                  }}
-                >
-                  <img
-                    src="/placeholder.svg?height=400&width=600"
-                    alt="Our team at work"
-                    className="w-full h-full object-cover rounded-lg"
-                  />
-                </motion.div>
-
-                {/* Floating elements */}
-                <motion.div
-                  className="absolute -top-10 -left-10 w-20 h-20 rounded-full bg-purple-500/20 blur-xl"
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.5, 0.8, 0.5],
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Number.POSITIVE_INFINITY,
-                    repeatType: "reverse",
-                  }}
-                />
-
-                <motion.div
-                  className="absolute -bottom-10 -right-10 w-20 h-20 rounded-full bg-blue-500/20 blur-xl"
-                  animate={{
-                    scale: [1, 1.3, 1],
-                    opacity: [0.5, 0.7, 0.5],
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Number.POSITIVE_INFINITY,
-                    repeatType: "reverse",
-                  }}
-                />
-
-                {/* Floating geometric shapes */}
-                <motion.div
-                  className="absolute top-20 right-10 w-10 h-10 border-2 border-purple-500/30 rounded-lg"
-                  animate={{
-                    rotate: [0, 180],
-                    y: [0, -20, 0],
-                  }}
-                  transition={{
-                    duration: 10,
-                    repeat: Number.POSITIVE_INFINITY,
-                    repeatType: "reverse",
-                  }}
-                />
-
-                <motion.div
-                  className="absolute bottom-20 left-10 w-8 h-8 border-2 border-blue-500/30 rounded-full"
-                  animate={{
-                    rotate: [0, -180],
-                    x: [0, 20, 0],
-                  }}
-                  transition={{
-                    duration: 8,
-                    repeat: Number.POSITIVE_INFINITY,
-                    repeatType: "reverse",
-                  }}
-                />
               </div>
             </motion.div>
           </div>
@@ -546,7 +455,7 @@ export default function AboutPageClient() {
                 </h3>
 
                 <p className="text-gray-300 mb-4">
-                  Our mission is to empower local businesses in Madhya Pradesh through innovative technology solutions
+                  Our mission is to empower businesses through innovative technology solutions
                   that solve real-world problems and drive growth.
                 </p>
 

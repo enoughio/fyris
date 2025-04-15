@@ -6,6 +6,7 @@ export interface Project {
     client: string
     year: string
     image: string
+    liveUrl?: string
     technologies: string[]
     challenge: string
     solution: string
@@ -33,6 +34,7 @@ export interface Project {
       category: "Web Development",
       description: "A modern e-commerce platform with advanced product filtering, secure payments, and admin dashboard.",
       client: "Bhopal Retail Group",
+      liveUrl: "https://example.com/ecommerce",
       year: "2023",
       image: "/placeholder.svg?height=600&width=800",
       technologies: ["React", "Next.js", "Node.js", "MongoDB", "Stripe", "AWS"],
@@ -103,6 +105,7 @@ export interface Project {
       category: "Web Application",
       description: "A comprehensive clinic management system for a healthcare provider in Madhya Pradesh.",
       client: "MP Healthcare",
+      liveUrl: "https://example.com/clinic",
       year: "2023",
       image: "/placeholder.svg?height=600&width=800",
       technologies: ["React", "Node.js", "PostgreSQL", "Docker", "AWS"],
@@ -174,6 +177,7 @@ export interface Project {
       description:
         "A digital ordering system for a restaurant chain with mobile app, QR code ordering, and kitchen display system.",
       client: "MP Cuisine",
+      liveUrl: "https://example.com/restaurant",
       year: "2023",
       image: "/placeholder.svg?height=600&width=800",
       technologies: ["React Native", "Next.js", "Node.js", "MongoDB", "Socket.io", "Firebase"],
@@ -245,6 +249,7 @@ export interface Project {
       description:
         "A professional portfolio website for a photographer in Bhopal with advanced image gallery and client proofing system.",
       client: "Bhopal Photography",
+      liveUrl: "https://example.com/photography",
       year: "2023",
       image: "/placeholder.svg?height=600&width=800",
       technologies: ["React", "Next.js", "Tailwind CSS", "Framer Motion", "Cloudinary", "Vercel"],
@@ -314,6 +319,7 @@ export interface Project {
       category: "AI Application",
       description: "An AI-powered content generation tool for a digital marketing agency to streamline content creation.",
       client: "Digital Marketers India",
+      liveUrl: "https://example.com/ai",
       year: "2023",
       image: "/placeholder.svg?height=600&width=800",
       technologies: ["React", "Node.js", "OpenAI API", "MongoDB", "Express", "AWS"],
@@ -379,4 +385,3 @@ export interface Project {
       isFeatured: false,
     },
   ]
-  

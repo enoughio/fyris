@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: "Blog - Insights on Technology & Software Development | Fyris",
     description:
       "Read our latest articles and insights on web development, mobile apps, AI, cloud computing, and technology trends. Stay updated with Fyris's expert perspectives.",
-    url: "https://fyris.com/blog",
+    url: "https://fyris.in/blog",
     siteName: "Fyris",
     images: [
       {

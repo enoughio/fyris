@@ -75,7 +75,7 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link href="/services#web-development" className="text-gray-400 hover:text-white transition-colors">
-                  Custom Software
+                  Custom Web Development
                 </Link>
               </li>
               <li>
@@ -106,18 +106,18 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start">
                 <MapPin className="mr-2 h-5 w-5 text-purple-500 flex-shrink-0 mt-0.5" />
-                <span className="text-gray-400">MP Nagar, Zone 1, Bhopal, Madhya Pradesh, 462011, India</span>
+                <span className="text-gray-400">254 E-2 Arera Colony, Bhopal, M.P,  India</span>
               </li>
               <li className="flex items-center">
                 <Phone className="mr-2 h-5 w-5 text-purple-500" />
-                <a href="tel:+19998887777" className="text-gray-400 hover:text-white transition-colors">
-                  +1 (999) 888-7777
+                <a href="tel:+919993553513" className="text-gray-400 hover:text-white transition-colors">
+                  +91 9993553513
                 </a>
               </li>
               <li className="flex items-center">
                 <Mail className="mr-2 h-5 w-5 text-purple-500" />
-                <a href="mailto:thebagaboo@gmail.com" className="text-gray-400 hover:text-white transition-colors">
-                  thebagaboo@gmail.com
+                <a href="mailto:contact@fyris.in" className="text-gray-400 hover:text-white transition-colors">
+                  contact@fyris.in
                 </a>
               </li>
             </ul>
@@ -126,7 +126,7 @@ export default function Footer() {
 
         <div className="mt-12 pt-8 border-t border-gray-800">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">&copy; {new Date().getFullYear()} Fyris. All rights reserved.</p>
+            <p className="text-gray-400 text-sm">&copy; {new Date().getFullYear()} FYRIS. All rights reserved.</p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <Link href="/privacy-policy" className="text-gray-400 hover:text-white text-sm transition-colors">
                 Privacy Policy

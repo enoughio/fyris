@@ -60,7 +60,7 @@ export default function ContactSection() {
                 <li className="flex items-start">
                   <Mail className="h-5 w-5 text-purple-500 mr-3 mt-1 flex-shrink-0" />
                   <div>
-                    <p className="text-gray-300">thebagaboo@gmail.com</p>
+                    <p className="text-gray-300">contact@fyris.in</p>
                   </div>
                 </li>
                 <li className="flex items-start">
@@ -72,7 +72,7 @@ export default function ContactSection() {
                 <li className="flex items-start">
                   <MapPin className="h-5 w-5 text-purple-500 mr-3 mt-1 flex-shrink-0" />
                   <div>
-                    <p className="text-gray-300">MP Nagar, Zone 1, Bhopal, Madhya Pradesh, 462011, India</p>
+                    <p className="text-gray-300">254 E-2 Arera, Colony, Bhopal, Madhya Pradesh, 462011, India</p>
                   </div>
                 </li>
               </ul>
