@@ -22,8 +22,8 @@ export interface JobListing {
       department: "Design",
       location: "Remote",
       type: "Full-time",
-      experience: "3-5+ years",
-      salary: "₹6,000–₹9,000 (based on experience and skill level)",
+      experience: "1+ years",
+      salary: "₹5,000–₹7,000 (based on experience and skill level)",
       description:
         "Lead our design team in creating intuitive, beautiful user interfaces and experiences for our clients.",
       fullDescription: `<p>FYRIS is seeking a talented and driven UI/UX Designer to join our remote team. This role is ideal for designers who are passionate about crafting intuitive, aesthetically pleasing user interfaces and delivering thoughtful user experiences across digital products.</p>`,
