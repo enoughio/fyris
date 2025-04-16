@@ -1,11 +1,18 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { useRouter } from "next/navigation"
-import { ChevronRight, Mail, Phone, MapPin, Clock, ArrowRight } from "lucide-react"
-import ContactForm from "@/components/contact-form"
-import { useState } from "react"
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import {
+  ChevronRight,
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
+  ArrowRight,
+} from "lucide-react";
+import ContactForm from "@/components/contact-form";
+import { useState } from "react";
 
 interface Office {
   name: string;
@@ -22,7 +29,7 @@ interface Offices {
 
 // Interactive office location selector
 const OfficeLocations = () => {
-  const [activeOffice, setActiveOffice] = useState<keyof Offices>("bhopal")
+  const [activeOffice, setActiveOffice] = useState<keyof Offices>("bhopal");
 
   const offices: Offices = {
     bhopal: {
@@ -37,7 +44,7 @@ const OfficeLocations = () => {
     //   name: "Indore Office",
     //   address: "456 Vijay Nagar, Indore, Madhya Pradesh 452010",
     //   phone: "+91 9594548313",
- 
+
     //   hours: "Monday - Friday: 9:00 AM - 6:00 PM",
     //   mapUrl: "https://maps.google.com/?q=Vijay+Nagar+Indore",
     // },
@@ -45,11 +52,11 @@ const OfficeLocations = () => {
     //   name: "Delhi Office",
     //   address: "789 Connaught Place, New Delhi 110001",
     //   phone: "+91 9594548313",
-    //   email: 
+    //   email:
     //   hours: "Monday - Friday: 9:30 AM - 6:30 PM",
     //   mapUrl: "https://maps.google.com/?q=Connaught+Place+Delhi",
     // },
-  }
+  };
 
   return (
     <div className="glass-card p-6">
@@ -118,12 +125,12 @@ const OfficeLocations = () => {
         </div>
       </motion.div>
     </div>
-  )
-}
+  );
+};
 
 // FAQ Accordion
 function FAQ() {
-  const [activeQuestion, setActiveQuestion] = useState<number | null>(null)
+  const [activeQuestion, setActiveQuestion] = useState<number | null>(null);
 
   const faqs = [
     {
@@ -137,7 +144,8 @@ function FAQ() {
         "Project timelines vary depending on the scope and complexity. A simple website might take 2-4 weeks, while a complex enterprise application could take several months. We'll provide a detailed timeline during our initial consultation.",
     },
     {
-      question: "Do you offer maintenance and support after project completion?",
+      question:
+        "Do you offer maintenance and support after project completion?",
       answer:
         "Yes, we offer ongoing maintenance and support services to ensure your application continues to run smoothly. We have various support packages available to suit different needs and budgets.",
     },
@@ -146,22 +154,31 @@ function FAQ() {
       answer:
         "We offer flexible pricing models including fixed-price quotes for well-defined projects and time-and-materials billing for projects with evolving requirements. We'll recommend the best approach based on your specific needs.",
     },
-  ]
+  ];
 
   return (
     <div className="glass-card p-6">
-      <h3 className="text-xl font-bold text-white mb-6">Frequently Asked Questions</h3>
+      <h3 className="text-xl font-bold text-white mb-6">
+        Frequently Asked Questions
+      </h3>
 
       <div className="space-y-4">
         {faqs.map((faq, index) => (
-          <div key={index} className="border border-gray-800 rounded-lg overflow-hidden">
+          <div
+            key={index}
+            className="border border-gray-800 rounded-lg overflow-hidden"
+          >
             <button
-              onClick={() => setActiveQuestion(activeQuestion === index ? null : index)}
+              onClick={() =>
+                setActiveQuestion(activeQuestion === index ? null : index)
+              }
               className="w-full p-4 text-left flex justify-between items-center hover:bg-gray-800/50 transition-colors"
             >
               <span className="font-medium text-white">{faq.question}</span>
               <ChevronRight
-                className={`h-5 w-5 text-purple-500 transition-transform duration-300 ${activeQuestion === index ? "rotate-90" : ""}`}
+                className={`h-5 w-5 text-purple-500 transition-transform duration-300 ${
+                  activeQuestion === index ? "rotate-90" : ""
+                }`}
               />
             </button>
 
@@ -180,12 +197,12 @@ function FAQ() {
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 export default function ContactPage() {
-  const router = useRouter()
-  const [contactMethod, setContactMethod] = useState("form")
+  const router = useRouter();
+  const [contactMethod, setContactMethod] = useState("form");
 
   return (
     <div className="pt-20">
@@ -204,8 +221,8 @@ export default function ContactPage() {
               <span className="gradient-text">Get in Touch</span>
             </h1>
             <p className="text-xl text-gray-300">
-              Have a question or want to discuss a project? We'd love to hear from you. Choose how you'd like to connect
-              with us.
+              Have a question or want to discuss a project? We'd love to hear
+              from you. Choose how you'd like to connect with us.
             </p>
           </motion.div>
 
@@ -243,7 +260,9 @@ export default function ContactPage() {
             >
               {contactMethod === "form" ? (
                 <div className="glass p-6 rounded-lg">
-                  <h2 className="text-2xl font-bold text-white mb-6">Send Us a Message</h2>
+                  <h2 className="text-2xl font-bold text-white mb-6">
+                    Send Us a Message
+                  </h2>
                   <ContactForm />
                 </div>
               ) : (
@@ -256,7 +275,9 @@ export default function ContactPage() {
                 <FAQ />
               ) : (
                 <div className="glass p-6 rounded-lg">
-                  <h2 className="text-2xl font-bold text-white mb-6">Send Us a Message</h2>
+                  <h2 className="text-2xl font-bold text-white mb-6">
+                    Send Us a Message
+                  </h2>
                   <ContactForm />
                 </div>
               )}
@@ -279,21 +300,23 @@ export default function ContactPage() {
               <span className="gradient-text">Visit Our Office</span>
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              We're located in the heart of Bhopal, easily accessible from all major parts of the city.
+              We're located in the heart of Bhopal, easily accessible from all
+              major parts of the city.
             </p>
           </motion.div>
 
           <div className="glass p-4 rounded-lg overflow-hidden">
             <div className="aspect-video w-full">
+         
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14665.460364118285!2d77.41861016977541!3d23.233599499999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x397c428f8fd68fbd%3A0x2155716d572d4f8!2sMP%20Nagar%2C%20Bhopal%2C%20Madhya%20Pradesh!5e0!3m2!1sen!2sin!4v1649930944120!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3666.683002595511!2d77.43456801079705!3d23.21822037894966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x397c424fc793d8d7%3A0xf3dbc72472b0f7ce!2s254%2C%20E-2%2C%20Arera%20Colony%2C%20Bhopal%2C%20Madhya%20Pradesh%20462016!5e0!3m2!1sen!2sin!4v1744785073189!5m2!1sen!2sin"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
                 title="Fyris Office Location"
+                referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
             </div>
           </div>
@@ -314,10 +337,13 @@ export default function ContactPage() {
                 transition={{ duration: 0.5 }}
               >
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                  <span className="gradient-text">Ready to Transform Your Business?</span>
+                  <span className="gradient-text">
+                    Ready to Transform Your Business?
+                  </span>
                 </h2>
                 <p className="text-xl text-gray-300 mb-8">
-                  Let's collaborate to build innovative solutions that drive growth and efficiency for your business.
+                  Let's collaborate to build innovative solutions that drive
+                  growth and efficiency for your business.
                 </p>
 
                 <Button
@@ -333,5 +359,5 @@ export default function ContactPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }
