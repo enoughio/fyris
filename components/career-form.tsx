@@ -228,6 +228,7 @@ export default function CareerForm({ role = "" }) {
               <Input
                 id="phone"
                 name="phone"
+                required
                 value={formState.phone}
                 onChange={handleChange}
                 placeholder="+91 9999999999"
@@ -244,7 +245,8 @@ export default function CareerForm({ role = "" }) {
                 name="location"
                 value={formState.location}
                 onChange={handleChange}
-                placeholder="City, Country"
+                required
+                placeholder="Full address"
                 className="bg-gray-900/50 border-gray-700 focus:border-purple-500"
               />
             </div>
@@ -295,6 +297,7 @@ export default function CareerForm({ role = "" }) {
               <Input
                 id="linkedin"
                 name="linkedin"
+                required
                 value={formState.linkedin}
                 onChange={handleChange}
                 placeholder="https://linkedin.com/in/yourprofile"
@@ -309,6 +312,7 @@ export default function CareerForm({ role = "" }) {
               <Input
                 id="portfolio"
                 name="portfolio"
+                required
                 value={formState.portfolio}
                 onChange={handleChange}
                 placeholder="https://yourportfolio.com"
@@ -323,14 +327,15 @@ export default function CareerForm({ role = "" }) {
               <Input
                 id="resumeLink"
                 name="resumeLink"
+                required
                 value={formState.resumeLink}
                 onChange={handleChange}
-                placeholder="https://drive.google.com/your-resume"
+                placeholder="https://drive.google.com/your-resume (accessible to anyone with the link)"
                 className="bg-gray-900/50 border-gray-700 focus:border-purple-500"
               />
             </div>
 
-            <div className="md:col-span-2 bg-gray-900/30 rounded-lg p-4 border border-dashed border-gray-700">
+            {/* <div className="md:col-span-2 bg-gray-900/30 rounded-lg p-4 border border-dashed border-gray-700">
               <Label className="text-sm font-medium text-gray-300 mb-2 block">Upload Resume</Label>
               <div className="flex items-center">
                 <Button type="button" variant="outline" className="text-sm mr-2">
@@ -339,7 +344,7 @@ export default function CareerForm({ role = "" }) {
                 <p className="text-sm text-gray-400">Or drag and drop a file here (.pdf, .doc, .docx, max 5MB)</p>
               </div>
               <p className="text-xs text-gray-500 mt-2">Alternatively, share your resume via link in the field above</p>
-            </div>
+            </div> */}
 
             <div className="space-y-2 md:col-span-2">
               <Label htmlFor="coverLetter" className="text-sm font-medium text-gray-300">
@@ -350,6 +355,7 @@ export default function CareerForm({ role = "" }) {
                 name="coverLetter"
                 value={formState.coverLetter}
                 onChange={handleChange}
+                required
                 placeholder="Introduce yourself and explain why you're interested in this position..."
                 rows={5}
                 className="bg-gray-900/50 border-gray-700 focus:border-purple-500"
