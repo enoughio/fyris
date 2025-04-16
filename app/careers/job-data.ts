@@ -95,7 +95,7 @@ export interface JobListing {
       location: "Remote",
       type: "Internship",
       experience: "Entry level",
-      salary: "₹1,000–₹2,000 (performance-based)",
+      salary: "₹1,000–₹2,000(performance-based)",
       description:
         "Help build beautiful, responsive web interfaces for our client projects using React and modern frontend technologies.",
       fullDescription: `<p>We at FYRIS are on the lookout for passionate Frontend Interns to join us for a 1-2 month remote internship!</p>

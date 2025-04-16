@@ -28,7 +28,7 @@ const OfficeLocations = () => {
     bhopal: {
       name: "Bhopal (Headquarters)",
       address: "254 E-2 Arera, Colony, Bhopal, Madhya Pradesh 462011",
-      phone: "+91 9993553513",
+      phone: "+91 9594548313",
       email: "contact@fyris.in",
       hours: "Monday - Friday: 9:00 AM - 6:00 PM",
       mapUrl: "https://maps.google.com/?q=254+E-2+Arera+Bhopal",
@@ -36,7 +36,7 @@ const OfficeLocations = () => {
     // indore: {
     //   name: "Indore Office",
     //   address: "456 Vijay Nagar, Indore, Madhya Pradesh 452010",
-    //   phone: "+91 9993553513",
+    //   phone: "+91 9594548313",
  
     //   hours: "Monday - Friday: 9:00 AM - 6:00 PM",
     //   mapUrl: "https://maps.google.com/?q=Vijay+Nagar+Indore",
@@ -44,7 +44,7 @@ const OfficeLocations = () => {
     // delhi: {
     //   name: "Delhi Office",
     //   address: "789 Connaught Place, New Delhi 110001",
-    //   phone: "+91 9993553513",
+    //   phone: "+91 9594548313",
     //   email: 
     //   hours: "Monday - Friday: 9:30 AM - 6:30 PM",
     //   mapUrl: "https://maps.google.com/?q=Connaught+Place+Delhi",

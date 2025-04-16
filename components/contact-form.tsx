@@ -194,7 +194,7 @@ export default function ContactForm() {
                 name="phone"
                 value={formState.phone}
                 onChange={handleChange}
-                placeholder="+91 9993553513"
+                placeholder="+91 9594548313"
                 className="bg-gray-900/50 border-gray-700 focus:border-purple-500"
               />
             </div>
