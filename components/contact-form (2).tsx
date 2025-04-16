@@ -10,11 +10,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { motion } from "framer-motion"
 import { Send, CheckCircle } from "lucide-react"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { addRegistration } from "@/lib/actions"
+import { addRegistration } from "@/lib/actions.js" // Adjust the import path as necessary
+import { Content } from "next/font/google"
 
 // Google Sheets Web App URL - kept as a constant to protect it
-const GOOGLE_SHEETS_CONTACT_FORM_URL =
-  "https://script.google.com/macros/s/AKfycbxNmlUr857QCh7u39p7HPyRUeu8p1iaGkxxhv1S-qFYIINqyfVd2pJPWZbbInFQ83vt/exec"
 
 export default function ContactForm() {
   const [formState, setFormState] = useState({
@@ -44,6 +43,8 @@ export default function ContactForm() {
     setIsSubmitting(true)
     setError(null)
 
+    
+
     try {
       // Create form data for submission
       const formData = new FormData(e.target as HTMLFormElement)
@@ -56,6 +57,9 @@ export default function ContactForm() {
       if (!response.successMessage) {
         throw new Error("Failed to submit form")
       }
+
+
+
 
       // Submit to Google Sheets
       // const response = await fetch(GOOGLE_SHEETS_CONTACT_FORM_URL, {
@@ -85,68 +89,15 @@ export default function ContactForm() {
           service: "",
           message: "",
         })
-      }, 25000)
-      setIsSubmitting(false)
-      setIsSubmitted(true)
-
+      }, 15000)
     } catch (error) {
       console.error("Error submitting form:", error)
-
-      // Fallback method using a hidden iframe
-      // try {
-      //   // Create a hidden iframe
-      //   const iframe = document.createElement("iframe")
-      //   iframe.name = "hidden-iframe"
-      //   iframe.style.display = "none"
-      //   document.body.appendChild(iframe)
-
-      //   // Create a form that will post to the Google Script
-      //   const form = document.createElement("form")
-      //   form.method = "POST"
-      //   form.action = GOOGLE_SHEETS_CONTACT_FORM_URL
-      //   form.target = "hidden-iframe"
-
-      //   // Add a hidden input with the JSON data
-      //   const input = document.createElement("input")
-      //   input.type = "hidden"
-      //   input.name = "data"
-      //   input.value = JSON.stringify(formState)
-      //   form.appendChild(input)
-
-      //   // Submit the form
-      //   document.body.appendChild(form)
-      //   form.submit()
-
-      //   // Clean up
-      //   setTimeout(() => {
-      //     document.body.removeChild(form)
-      //     document.body.removeChild(iframe)
-      //   }, 1000)
-
-      //   setIsSubmitting(false)
-      //   setIsSubmitted(true)
-
-      //   // Reset form after showing success message
-      //   setTimeout(() => {
-      //     setIsSubmitted(false)
-      //     setFormState({
-      //       name: "",
-      //       email: "",
-      //       phone: "",
-      //       company: "",
-      //       service: "",
-      //       message: "",
-      //     })
-      //   }, 5000)
-      // } catch (fallbackError) {
-      //   console.error("Fallback method also failed:", fallbackError)
-        setIsSubmitting(false)
-        setError(
-          "There was an error submitting your message. Please try again or contact us directly at contact@fyris.in",
-        )
-      // }
-
+      setIsSubmitting(false)
+      setError(
+        "There was an error submitting your message. Please try again or contact us directly at thebagaboo@gmail.com",
+      )
     }
+    
   }
 
   return (
@@ -209,7 +160,7 @@ export default function ContactForm() {
                 name="phone"
                 value={formState.phone}
                 onChange={handleChange}
-                placeholder="+91 9594548313"
+                placeholder="+91 9993553513"
                 className="bg-gray-900/50 border-gray-700 focus:border-purple-500"
               />
             </div>
@@ -232,12 +183,12 @@ export default function ContactForm() {
               <label htmlFor="service" className="text-sm font-medium text-gray-300">
                 Service You're Interested In
               </label>
-              <Select value={formState.service} onValueChange={handleSelectChange}>
-                <SelectTrigger className="bg-gray-900/50 border-gray-700 focus:border-purple-500">
+              <Select name="service" value={formState.service} onValueChange={handleSelectChange}>
+                <SelectTrigger  className="bg-gray-900/50 border-gray-700 focus:border-purple-500">
                   <SelectValue placeholder="Select a service" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="web-development">Custom Web Development</SelectItem>
+                  <SelectItem value="web-development">Custom Software</SelectItem>
                   <SelectItem value="ai-automation">AI & Automation Solutions</SelectItem>
                   <SelectItem value="cloud-devops">Cloud & DevOps Consulting</SelectItem>
                   <SelectItem value="mobile-apps">Mobile App Development</SelectItem>
