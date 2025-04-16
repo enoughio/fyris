@@ -156,7 +156,8 @@ export default function CareerForm({ role = "" }) {
     "UI/UX Design",
     "UI/UX Design Intern",
     "Frontend Web Developer Intern",
-    "Frontend Web Develope",
+    "Frontend Web Developer",
+    "Backend Web Developer",
     "Full Stack Developer",
     "Other",
   ]
