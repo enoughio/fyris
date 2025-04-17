@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -24,7 +23,7 @@ export default function CareerForm({ role = "" }) {
     location: "",
     linkedin: "",
     portfolio: "",
-    role: role,
+    role: "",
     resumeLink: "",
     message: "",
     coverLetter: "",
@@ -58,7 +57,6 @@ export default function CareerForm({ role = "" }) {
             if (!response.successMessage) {
               throw new Error("Failed to submit form")
             }
-      
       
             setIsSubmitting(false)
             setIsSubmitted(true)

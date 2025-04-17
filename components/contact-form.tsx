@@ -13,8 +13,6 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { addRegistration } from "@/lib/actions"
 
 // Google Sheets Web App URL - kept as a constant to protect it
-const GOOGLE_SHEETS_CONTACT_FORM_URL =
-  "https://script.google.com/macros/s/AKfycbxNmlUr857QCh7u39p7HPyRUeu8p1iaGkxxhv1S-qFYIINqyfVd2pJPWZbbInFQ83vt/exec"
 
 export default function ContactForm() {
   const [formState, setFormState] = useState({
