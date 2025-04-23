@@ -133,44 +133,16 @@ export default function BlogPage() {
 
   const blogPosts: BlogPost[] = [
     {
-      id: "ai-revolution-in-business",
-      title: "The AI Revolution in Business: What Madhya Pradesh Companies Need to Know",
-      excerpt:
-        "Artificial Intelligence is transforming businesses across India. Learn how companies in Madhya Pradesh can leverage AI to gain a competitive edge.",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl sit amet nisl. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl sit amet nisl.",
-      author: "Vikram Singh",
-      date: "March 15, 2023",
-      readTime: "5 min read",
-      image: "/placeholder.svg?height=400&width=600",
-      category: "Artificial Intelligence",
-      tags: ["AI", "Business", "Technology", "Digital Transformation"],
-    },
-    {
-      id: "cloud-migration-strategies",
-      title: "Cloud Migration Strategies for Small and Medium Businesses",
-      excerpt:
-        "Moving to the cloud can be challenging for SMBs. Discover practical strategies to make your cloud migration smooth and successful.",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl sit amet nisl. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl sit amet nisl.",
-      author: "Ananya Sharma",
-      date: "February 28, 2023",
-      readTime: "7 min read",
-      image: "/placeholder.svg?height=400&width=600",
-      category: "Cloud Computing",
-      tags: ["Cloud", "Migration", "SMB", "Infrastructure"],
-    },
-    {
       id: "mobile-app-development-trends",
       title: "5 Mobile App Development Trends Dominating 2023",
       excerpt:
         "Stay ahead of the curve with these cutting-edge mobile app development trends that are shaping the digital landscape in 2023.",
       content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl sit amet nisl. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl sit amet nisl.",
+      "5 Mobile App Development Trends Dominating 2024. The mobile app industry continues to evolve rapidly, and 2024 has brought forward innovative trends that are transforming the way users interact with technology. Businesses looking to stay ahead must understand and adapt to these developments to deliver seamless, engaging, and future-proof experiences. One of the top trends dominating 2024 is the rise of AI-powered personalization. Apps now integrate machine learning algorithms to provide users with dynamic content recommendations, predictive text, behavior-based notifications, and intelligent chatbots—boosting engagement and retention rates. The second major trend is the increased adoption of 5G technology, which is enabling faster data transfer, improved app performance, and the ability to support high-definition streaming, real-time AR/VR applications, and complex multiplayer mobile games. The third trend is the focus on super apps—platforms that combine multiple services like payments, messaging, shopping, and bookings within a single application. These apps are gaining traction as users prefer an all-in-one solution that reduces the need for multiple downloads. The fourth trend centers around cross-platform development. Frameworks like Flutter and React Native are becoming increasingly popular, allowing developers to build apps for both iOS and Android using a single codebase. This significantly reduces development costs and time-to-market while maintaining native performance and aesthetics. The fifth major trend is privacy and data security. With users becoming more concerned about how their data is used, apps in 2024 are prioritizing secure logins, encrypted communications, transparent permissions, and compliance with global privacy regulations like GDPR and CCPA. In conclusion, mobile app development in 2024 is being driven by personalization, speed, multifunctionality, cross-platform compatibility, and data protection. Companies that embrace these trends will not only enhance user satisfaction but also gain a competitive edge in the crowded app marketplace.",
       author: "Rajat Verma",
-      date: "January 12, 2023",
+      date: "November 12, 2024",
       readTime: "6 min read",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/mobile-app-development-trends.png",
       category: "Mobile Development",
       tags: ["Mobile", "App Development", "Trends", "Technology"],
     },
@@ -179,12 +151,11 @@ export default function BlogPage() {
       title: "Essential Cybersecurity Measures for Businesses in 2023",
       excerpt:
         "Protect your business from cyber threats with these essential security measures that every company should implement.",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl sit amet nisl. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl sit amet nisl.",
+      content:"Essential Cybersecurity Measures for Businesses in 2025. As businesses become increasingly digital in 2025, cybersecurity is no longer optional—it is a critical necessity. With growing threats like ransomware, phishing, supply chain attacks, and insider breaches, companies must take proactive steps to protect their digital infrastructure and customer data. Cybercriminals are using AI-powered tools and sophisticated attack vectors, making it vital for organizations to stay ahead with modern security protocols. One of the foundational cybersecurity measures for businesses is the implementation of a zero-trust architecture. This model assumes no device or user is trustworthy by default and continuously verifies access, dramatically reducing the risk of lateral movement in the event of a breach. Companies should also enforce multi-factor authentication (MFA) across all systems to ensure secure access and prevent unauthorized logins. Regular patch management and software updates are crucial to close known vulnerabilities that attackers often exploit. Businesses must adopt endpoint detection and response (EDR) systems, which provide real-time visibility and rapid incident response capabilities. Firewalls, intrusion detection systems (IDS), and secure network configurations act as the first line of defense against external threats. Employee training remains one of the most effective cybersecurity strategies. In 2025, social engineering attacks are more deceptive than ever, making it essential for organizations to educate staff on recognizing phishing emails, suspicious links, and proper data handling. Data encryption—both at rest and in transit—ensures that even if data is intercepted, it remains unreadable. Companies must also invest in secure cloud solutions with compliance certifications to protect sensitive data stored and processed online. Developing a business continuity and disaster recovery plan is imperative to ensure quick restoration of services and minimal data loss during cyber incidents. Regular security audits, penetration testing, and vulnerability assessments help identify and fix gaps in the security posture. Moreover, businesses should align with cybersecurity frameworks like ISO/IEC 27001, NIST, or GDPR compliance, depending on their region and industry. In conclusion, 2025 demands a forward-thinking and layered approach to cybersecurity. By integrating advanced technologies, enforcing strict access controls, training employees, and continuously monitoring their IT environments, businesses can significantly reduce their risk and build trust with customers and partners. Cybersecurity is no longer just an IT issue—it's a business priority and a cornerstone of long-term resilience and success.",
       author: "Neha Gupta",
-      date: "April 5, 2023",
+      date: "April 5, 2025",
       readTime: "8 min read",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/cybersecurity-for-businesses.png",
       category: "Cybersecurity",
       tags: ["Security", "Cyber Threats", "Data Protection", "Privacy"],
     },
@@ -193,12 +164,11 @@ export default function BlogPage() {
       title: "Comparing Modern Web Development Frameworks: React vs. Vue vs. Angular",
       excerpt:
         "Confused about which framework to choose for your next web project? This comprehensive comparison will help you make an informed decision.",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl sit amet nisl. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl sit amet nisl.",
+      content:"Comparing Modern Web Development Frameworks: React vs. Vue vs. Angular. In the fast-paced world of web development, choosing the right framework can significantly influence the performance, scalability, and maintainability of a project. Among the most popular choices today are React, Vue, and Angular. Each framework brings its unique strengths, community support, and ecosystem, making it crucial for developers and businesses to understand their differences before making a decision. React, developed by Facebook, is a JavaScript library focused on building user interfaces. It uses a component-based architecture, which allows developers to create reusable UI components, enhancing code maintainability and scalability. React’s virtual DOM enables fast and efficient updates, making it a top choice for dynamic, high-performance applications. The large developer community and ecosystem of libraries and tools also make React an attractive option for startups and enterprises alike. Vue.js, on the other hand, is a progressive JavaScript framework created by Evan You. Vue is praised for its simplicity and ease of integration, especially for projects that need to be scaled gradually. Its core library focuses on the view layer, but it offers additional packages for routing and state management when needed. Vue’s gentle learning curve, two-way data binding, and detailed documentation make it a favorite among beginner and intermediate developers. It strikes a balance between the structure of Angular and the flexibility of React. Angular, developed and maintained by Google, is a comprehensive framework for building large-scale, enterprise-grade applications. Unlike React and Vue, Angular is a full-fledged MVC framework that includes everything from data binding and routing to form validation and HTTP services. It uses TypeScript, a statically typed superset of JavaScript, which adds an additional layer of security and maintainability. Angular’s robust CLI tools, dependency injection, and strong community support make it a powerful option for complex applications with strict architectural requirements. When comparing performance, React tends to be the most lightweight and flexible, especially for single-page applications (SPAs). Vue offers a balanced approach with performance close to React and a more opinionated structure. Angular, while heavier, excels in managing large applications with many moving parts. The choice between these frameworks ultimately depends on the project requirements, team expertise, and future scalability needs. For quick prototypes or progressive enhancement, Vue might be the most efficient. React is ideal for interactive UIs and large user bases, while Angular is suited for enterprise-level applications that demand a complete solution. In conclusion, React, Vue, and Angular each serve specific use cases and offer distinct development philosophies. By carefully evaluating their features, performance, and ecosystem, developers can select the most suitable framework to deliver modern, scalable, and high-performing web applications.",
       author: "Arjun Kumar",
       date: "March 22, 2023",
       readTime: "10 min read",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/web-development-frameworks.png",
       category: "Web Development",
       tags: ["React", "Vue", "Angular", "Frameworks", "Frontend"],
     },
@@ -208,11 +178,11 @@ export default function BlogPage() {
       excerpt:
         "Discover how blockchain technology is bringing transparency, efficiency, and security to supply chain operations across industries.",
       content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl sit amet nisl. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl sit amet nisl.",
+      "How Blockchain is Revolutionizing Supply Chain Management. In today’s increasingly globalized and complex economy, supply chain management has become a critical function for businesses across industries. As companies strive for more efficiency, transparency, and security in their supply chains, blockchain technology is emerging as a transformative force. Originally known as the foundation of cryptocurrencies like Bitcoin, blockchain is now disrupting supply chain operations by offering traceability, security, and real-time data sharing. At its core, blockchain is a decentralized, immutable ledger that records transactions across multiple computers. This distributed structure ensures that no single party controls the data, making it highly secure and tamper-proof. In supply chain management, this means stakeholders — from manufacturers and suppliers to logistics providers and retailers — can access a shared, real-time view of the flow of goods and information. One of the most significant benefits of blockchain in the supply chain is enhanced transparency and traceability. With blockchain, each step in the product journey — from raw materials to final delivery — is recorded in a chronological, verifiable, and immutable way. This helps reduce fraud, counterfeiting, and gray market activities, which are particularly common in industries such as pharmaceuticals, food, and luxury goods. Consumers, too, can gain confidence by verifying product origin and authenticity. Another major advantage is improved efficiency and reduced paperwork. Smart contracts — self-executing agreements with terms written into code — can automate transactions and trigger actions when certain conditions are met. This eliminates the need for intermediaries, minimizes human error, and reduces delays. For example, a smart contract could automatically release payment once goods are delivered and verified. Real-time data sharing is another game-changer. In traditional supply chains, data silos and lack of trust between parties often hinder decision-making. With blockchain, every participant has access to a single source of truth. This leads to faster dispute resolution, better inventory management, and improved collaboration between partners. Moreover, blockchain strengthens supply chain security. Since data on a blockchain cannot be altered without consensus from the network, it significantly reduces the risk of cyberattacks and data manipulation. This level of data integrity is crucial for industries dealing with sensitive information or compliance-heavy environments. Several leading companies and industries have already started integrating blockchain into their supply chain systems. For instance, IBM and Maersk’s TradeLens platform is digitizing global trade, while Walmart is using blockchain to track food products from farm to shelf in seconds, rather than days. While blockchain offers immense potential, it’s essential to address challenges such as scalability, standardization, and regulatory hurdles. Nonetheless, as technology continues to evolve, the adoption of blockchain in supply chain management is expected to grow, bringing with it a new era of accountability, efficiency, and innovation.",
       author: "Priya Patel",
       date: "April 18, 2023",
       readTime: "7 min read",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/blockchain-in-supply-chain.png",
       category: "Blockchain",
       tags: ["Blockchain", "Supply Chain", "Transparency", "Innovation"],
     },
