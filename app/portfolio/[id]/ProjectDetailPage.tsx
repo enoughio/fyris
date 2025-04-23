@@ -15,10 +15,18 @@ import {
   Layers,
   Zap,
   Users,
+  Globe,
+  Building,
+  Award,
+  Clock,
+  Link2,
+  Monitor,
+  Lightbulb,
+  Target,
 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
-import { portfolioProjects } from "../portfolio-data"
-import type { Project } from "../portfolio-data"
+import { portfolioData } from "@/app/portfolio/portfolio-data"
+import type { Project } from "@/app/portfolio/portfolio-data"
 
 export default function ProjectDetailPage({ id }: { id: string }) {
   const router = useRouter()
@@ -28,7 +36,7 @@ export default function ProjectDetailPage({ id }: { id: string }) {
 
   useEffect(() => {
     // Find the project by ID
-    const foundProject = portfolioProjects.find((p) => p.id === id)
+    const foundProject = portfolioData.find((p) => p.id === id)
     setProject(foundProject || null)
     setLoading(false)
   }, [id])
@@ -62,15 +70,23 @@ export default function ProjectDetailPage({ id }: { id: string }) {
   }
 
   // Find related projects (projects with similar category)
-  const relatedProjects = portfolioProjects
-    .filter((p) => p.id !== project.id && p.category === project.category)
-    .slice(0, 2)
+  const relatedProjects = portfolioData
+    .filter((p) => p.category === project.category && p.id !== project.id)
+    .slice(0, 3)
 
   return (
     <div className="pt-20">
       {/* Hero Section */}
       <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950" />
+
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute inset-0 opacity-30">
+            <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_30%_20%,rgba(120,50,255,0.15),transparent_40%)]"></div>
+            <div className="absolute bottom-0 left-0 w-full h-full bg-[radial-gradient(circle_at_70%_80%,rgba(50,120,255,0.15),transparent_40%)]"></div>
+          </div>
+        </div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <Button
@@ -94,10 +110,27 @@ export default function ProjectDetailPage({ id }: { id: string }) {
                   <span>Year: {project.year}</span>
                 </div>
 
-                <div className="flex items-center mb-2">
+                <div className="flex items-center mr-6 mb-2">
+                  <Building className="h-4 w-4 mr-1" />
                   <span>Client: {project.client}</span>
                 </div>
+
+                {project.liveUrl && (
+                  <div className="flex items-center mb-2">
+                    <Globe className="h-4 w-4 mr-1" />
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-purple-400 hover:text-purple-300 transition-colors"
+                    >
+                      Visit Live Site
+                    </a>
+                  </div>
+                )}
               </div>
+
+              <p className="text-gray-300 text-lg">{project.fullDescription}</p>
             </motion.div>
           </div>
         </div>
@@ -106,8 +139,8 @@ export default function ProjectDetailPage({ id }: { id: string }) {
       {/* Featured Image & Gallery */}
       <section className="py-8">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            <div className="relative h-[400px] rounded-lg overflow-hidden mb-4">
+          <div className="max-w-5xl mx-auto">
+            <div className="relative h-[500px] rounded-lg overflow-hidden mb-4 shadow-xl">
               <img
                 src={project.gallery[activeImage] || project.image}
                 alt={project.title}
@@ -141,39 +174,67 @@ export default function ProjectDetailPage({ id }: { id: string }) {
       {/* Project Overview */}
       <section className="py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             <div className="glass p-8 rounded-lg">
-              <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
-                <Layers className="mr-2 h-6 w-6 text-purple-500" />
-                Project Overview
-              </h2>
+              {/* Project Summary */}
+              <div className="mb-12">
+                <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+                  <Layers className="mr-2 h-6 w-6 text-purple-500" />
+                  Project Overview
+                </h2>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-                <div className="col-span-2">
-                  <h3 className="text-xl font-bold text-white mb-4">The Challenge</h3>
-                  <p className="text-gray-300 mb-6">{project.challenge}</p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                  <div className="col-span-2">
+                    <h3 className="text-xl font-bold text-white mb-4 flex items-center">
+                      <Target className="mr-2 h-5 w-5 text-purple-400" />
+                      The Challenge
+                    </h3>
+                    <p className="text-gray-300 mb-6">{project.challenge}</p>
 
-                  <h3 className="text-xl font-bold text-white mb-4">Our Solution</h3>
-                  <p className="text-gray-300">{project.solution}</p>
-                </div>
+                    <h3 className="text-xl font-bold text-white mb-4 flex items-center">
+                      <Lightbulb className="mr-2 h-5 w-5 text-purple-400" />
+                      Our Solution
+                    </h3>
+                    <p className="text-gray-300">{project.solution}</p>
+                  </div>
 
-                <div>
-                  <div className="glass-card p-6">
-                    <h3 className="text-lg font-bold text-white mb-4">Technologies Used</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech, index) => (
-                        <Badge key={index} className="bg-gray-800 hover:bg-gray-700">
-                          {tech}
-                        </Badge>
-                      ))}
+                  <div>
+                    <div className="glass-card p-6 h-full">
+                      <h3 className="text-lg font-bold text-white mb-4 flex items-center">
+                        <Code className="mr-2 h-5 w-5 text-purple-400" />
+                        Technologies Used
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        {project.technologies.map((tech, index) => (
+                          <Badge key={index} className="bg-gray-800 hover:bg-gray-700">
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
+              {/* Key Features */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-white mb-6 flex items-center">
+                  <Monitor className="mr-2 h-5 w-5 text-purple-500" />
+                  Key Features
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {project.features.map((feature, index) => (
+                    <div key={index} className="flex items-start bg-gray-900/50 p-4 rounded-lg">
+                      <CheckCircle className="h-5 w-5 text-purple-500 mr-3 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-300">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               {/* Results Section */}
-              <div className="mb-8">
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center">
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-white mb-6 flex items-center">
                   <Zap className="mr-2 h-5 w-5 text-purple-500" />
                   Results & Impact
                 </h3>
@@ -182,7 +243,7 @@ export default function ProjectDetailPage({ id }: { id: string }) {
                     <div key={index} className="flex items-start">
                       <div className="flex-shrink-0 mr-3">
                         <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 flex items-center justify-center">
-                          <CheckCircle className="h-4 w-4 text-purple-500" />
+                          <Award className="h-4 w-4 text-purple-500" />
                         </div>
                       </div>
                       <p className="text-gray-300">{result}</p>
@@ -193,41 +254,25 @@ export default function ProjectDetailPage({ id }: { id: string }) {
 
               {/* Testimonial Section */}
               {project.testimonial && (
-                <div className="mb-8">
-                  <div className="glass-card p-6 border-l-4 border-purple-500">
-                    <p className="text-gray-300 italic mb-4">"{project.testimonial.quote}"</p>
+                <div className="mb-12">
+                  <div className="glass-card p-8 border-l-4 border-purple-500 bg-gradient-to-r from-purple-900/10 to-blue-900/10">
+                    <p className="text-gray-300 italic mb-6 text-lg">"{project.testimonial.quote}"</p>
                     <div className="flex items-center">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white font-bold mr-3">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white font-bold text-lg mr-4">
                         {project.testimonial.author.charAt(0)}
                       </div>
                       <div>
                         <p className="text-white font-semibold">{project.testimonial.author}</p>
-                        <p className="text-gray-400 text-sm">{project.testimonial.position}</p>
+                        <p className="text-gray-400">{project.testimonial.position}</p>
                       </div>
                     </div>
                   </div>
                 </div>
               )}
 
-              {/* Features Section */}
-              <div className="mb-8">
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center">
-                  <Code className="mr-2 h-5 w-5 text-purple-500" />
-                  Key Features
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {project.features.map((feature, index) => (
-                    <div key={index} className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-300">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
               {/* Process Section */}
-              <div className="mb-8">
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center">
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-white mb-6 flex items-center">
                   <Users className="mr-2 h-5 w-5 text-purple-500" />
                   Our Process
                 </h3>
@@ -235,7 +280,7 @@ export default function ProjectDetailPage({ id }: { id: string }) {
                   {/* Center line */}
                   <div className="absolute left-[22px] top-2 bottom-10 w-1 bg-gradient-to-b from-purple-600 via-blue-500 to-cyan-400"></div>
 
-                  <div className="space-y-6">
+                  <div className="space-y-8">
                     {project.process.map((step, index) => (
                       <div key={index} className="flex">
                         <div className="flex-shrink-0 mr-6">
@@ -256,32 +301,44 @@ export default function ProjectDetailPage({ id }: { id: string }) {
 
               {/* Next Steps Section */}
               {project.nextSteps && (
-                <div className="mb-8">
-                  <h3 className="text-xl font-bold text-white mb-4">Next Steps</h3>
-                  <p className="text-gray-300">{project.nextSteps}</p>
+                <div className="mb-12">
+                  <h3 className="text-xl font-bold text-white mb-4 flex items-center">
+                    <Clock className="mr-2 h-5 w-5 text-purple-500" />
+                    Future Development
+                  </h3>
+                  <div className="bg-gray-900/50 p-6 rounded-lg border-l-4 border-blue-500">
+                    <p className="text-gray-300">{project.nextSteps}</p>
+                  </div>
                 </div>
               )}
 
               {/* Project Links */}
-              <div className="flex justify-between items-center pt-6 border-t border-gray-800">
+              <div className="flex flex-col sm:flex-row justify-between items-center pt-6 border-t border-gray-800 gap-4">
                 <Button
                   onClick={() => router.push("/portfolio")}
                   variant="outline"
-                  className="border-purple-500/50 hover:border-purple-500 text-white"
+                  className="border-purple-500/50 hover:border-purple-500 text-white w-full sm:w-auto"
                 >
                   <ChevronLeft className="mr-2 h-5 w-5" />
                   Back to Portfolio
                 </Button>
 
-                {project.link && (
-                  <Button
-                    onClick={() => window.open(project.link, "_blank")}
-                    className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
-                  >
-                    Visit Project
-                    <ExternalLink className="ml-2 h-5 w-5" />
+                <div className="flex gap-4 w-full sm:w-auto">
+                  {project.liveUrl && (
+                    <Button
+                      onClick={() => window.open(project.liveUrl, "_blank")}
+                      className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white w-full sm:w-auto"
+                    >
+                      Visit Live Site
+                      <ExternalLink className="ml-2 h-5 w-5" />
+                    </Button>
+                  )}
+
+                  <Button onClick={() => router.push("/contact")} variant="secondary" className="w-full sm:w-auto">
+                    Start a Similar Project
+                    <Link2 className="ml-2 h-5 w-5" />
                   </Button>
-                )}
+                </div>
               </div>
             </div>
           </div>
@@ -294,7 +351,7 @@ export default function ProjectDetailPage({ id }: { id: string }) {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-2xl font-bold text-white mb-8">Similar Projects</h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
               {relatedProjects.map((relatedProject, index) => (
                 <motion.div
                   key={relatedProject.id}

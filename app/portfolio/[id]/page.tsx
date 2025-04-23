@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { portfolioProjects } from "../portfolio-data"
+import { portfolioData } from "@/app/portfolio/portfolio-data"
 import ProjectDetailPageComponent from "./ProjectDetailPageComponent"
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
 }
 
 export function generateMetadata({ params }: Props): Metadata {
-  const project = portfolioProjects.find((p) => p.id === params.id)
+  const project = portfolioData.find((p) => p.id === params.id)
 
   if (!project) {
     return {

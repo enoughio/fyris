@@ -63,12 +63,12 @@ export default function ContactSection() {
                     <p className="text-gray-300">contact@fyris.in</p>
                   </div>
                 </li>
-                <li className="flex items-start">
+                {/* <li className="flex items-start">
                   <Phone className="h-5 w-5 text-purple-500 mr-3 mt-1 flex-shrink-0" />
                   <div>
                     <p className="text-gray-300">+91 9594548313</p>
                   </div>
-                </li>
+                </li> */}
                 <li className="flex items-start">
                   <MapPin className="h-5 w-5 text-purple-500 mr-3 mt-1 flex-shrink-0" />
                   <div>

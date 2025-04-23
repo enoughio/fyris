@@ -21,7 +21,7 @@ import {
 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
-import { portfolioProjects } from "./portfolio-data"
+import { portfolioData } from "@/app/portfolio/portfolio-data"
 import type { Project } from "./portfolio-data"
 
 function ProjectCard({ project, index, priority = false }: { project: Project; index: number; priority?: boolean }) {
@@ -240,6 +240,7 @@ export default function PortfolioClientPage() {
   const [isFilterMenuOpen, setIsFilterMenuOpen] = useState(false)
   const [activeFilters, setActiveFilters] = useState<string[]>([])
   const filterRef = useRef<HTMLDivElement>(null)
+  const [filteredProjects, setFilteredProjects] = useState(portfolioData)
 
   // Handle clicks outside the filter menu
   useEffect(() => {
@@ -253,8 +254,20 @@ export default function PortfolioClientPage() {
     return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [])
 
+  useEffect(() => {
+    setFilteredProjects(portfolioData)
+  }, [])
+
   // Filter projects based on search query and category filter
-  const filteredProjects = portfolioProjects.filter((project) => {
+  const filterProjects = (category: string) => {
+    if (category === "All") {
+      setFilteredProjects(portfolioData)
+    } else {
+      setFilteredProjects(portfolioData.filter((project) => project.category === category))
+    }
+  }
+
+  const displayedProjects = filteredProjects.filter((project) => {
     // Apply search filter
     if (searchQuery) {
       const searchLower = searchQuery.toLowerCase()
@@ -281,17 +294,17 @@ export default function PortfolioClientPage() {
   })
 
   // Get featured projects
-  const featuredProjects = portfolioProjects.filter((project) => project.isFeatured)
+  const featuredProjects = portfolioData.filter((project) => project.isFeatured)
 
   // Get non-featured projects
-  const nonFeaturedProjects = filteredProjects.filter((project) => !project.isFeatured)
+  const nonFeaturedProjects = displayedProjects.filter((project) => !project.isFeatured)
 
   // Get unique categories for filter
-  const categories = ["all", ...new Set(portfolioProjects.map((project) => project.category.toLowerCase()))]
+  const categories = ["all", ...new Set(portfolioData.map((project) => project.category.toLowerCase()))]
 
   // Get unique technologies for tag filtering
   const allTechnologies = Array.from(
-    new Set(portfolioProjects.flatMap((project) => project.technologies.map((tech) => tech.toLowerCase()))),
+    new Set(portfolioData.flatMap((project) => project.technologies.map((tech) => tech.toLowerCase()))),
   ).sort()
 
   // Toggle tag filter
@@ -522,11 +535,11 @@ export default function PortfolioClientPage() {
             <h2 className="text-2xl font-bold text-white mb-4 md:mb-0 flex items-center">
               <Code className="mr-2 h-5 w-5 text-purple-500" />
               {searchQuery || filter !== "all" || activeFilters.length > 0 ? "Filtered Projects" : "All Projects"}
-              <Badge className="ml-3 bg-gray-700">{filteredProjects.length}</Badge>
+              <Badge className="ml-3 bg-gray-700">{displayedProjects.length}</Badge>
             </h2>
           </div>
 
-          {filteredProjects.length > 0 ? (
+          {displayedProjects.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {nonFeaturedProjects.map((project, index) => (
                 <ProjectCard
