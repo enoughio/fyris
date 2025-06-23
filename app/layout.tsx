@@ -5,6 +5,8 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
+import { Analytics } from '@vercel/analytics/next';
+
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -39,7 +41,9 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
             <Navbar />
+
             <main>{children}</main>
+             <Analytics />
             <Footer />
           </div>
         </ThemeProvider>
