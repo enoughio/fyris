@@ -191,7 +191,7 @@ export default function CareerForm({ role = "" }) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <Label htmlFor="name" className="text-sm font-medium text-gray-300">
-                Full Name*
+                Full Name
               </Label>
               <Input
                 id="name"
@@ -206,7 +206,7 @@ export default function CareerForm({ role = "" }) {
 
             <div className="space-y-2">
               <Label htmlFor="email" className="text-sm font-medium text-gray-300">
-                Email Address*
+                Email Address
               </Label>
               <Input
                 id="email"
