@@ -354,7 +354,7 @@ export default function CareerForm({ role = "" }) {
                 name="coverLetter"
                 value={formState.coverLetter}
                 onChange={handleChange}
-                placeholder="Introduce yourself and explain why you're interested in this position..."
+                 placeholder="Do you have any questions for us ?"
                 rows={5}
                 className="bg-gray-900/50 border-gray-700 focus:border-purple-500"
               />
