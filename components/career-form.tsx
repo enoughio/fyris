@@ -237,7 +237,7 @@ export default function CareerForm({ role = "" }) {
 
             <div className="space-y-2">
               <Label htmlFor="location" className="text-sm font-medium text-gray-300">
-                Your Location
+                Your current address
               </Label>
               <Input
                 id="location"
@@ -321,7 +321,7 @@ export default function CareerForm({ role = "" }) {
 
             <div className="space-y-2">
               <Label htmlFor="resumeLink" className="text-sm font-medium text-gray-300">
-                Resume Link (Google Drive, Dropbox, etc.)
+                Resume Link (Google Drive, Dropbox, etc. make sure it's accessible)
               </Label>
               <Input
                 id="resumeLink"
@@ -347,14 +347,13 @@ export default function CareerForm({ role = "" }) {
 
             <div className="space-y-2 md:col-span-2">
               <Label htmlFor="coverLetter" className="text-sm font-medium text-gray-300">
-                Cover Letter
+                Any Questions
               </Label>
               <Textarea
                 id="coverLetter"
                 name="coverLetter"
                 value={formState.coverLetter}
                 onChange={handleChange}
-                required
                 placeholder="Introduce yourself and explain why you're interested in this position..."
                 rows={5}
                 className="bg-gray-900/50 border-gray-700 focus:border-purple-500"
