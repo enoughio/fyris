@@ -1,9 +1,13 @@
+import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
+import WhatWeDo from "@/components/WhatWeDo";
 
 export default function Home() {
   return (
-    <div className="">  
-    <Navbar />
-    </div>
+    <main className="w-full h-full overflow-x-hidden">  
+    <Navbar /> 
+    <Hero />
+    <WhatWeDo />
+    </main>
   );
 }

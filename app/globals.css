@@ -6,13 +6,14 @@
   --color-light: #26C5EF;
   --color-purple: #4C61C0;
   --color-third: #914BAC;
+  --font-raleway: var(--raleway);
   --font-teachers: var(--teachers); /* Add this line */
   --theme-gradient: linear-gradient(90deg, var(--color-light), var(--color-purple), var(--color-third));
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: black;
     --foreground: #ededed;
   }
 }
@@ -41,4 +42,33 @@ body {
 
 .gradient-bg {
   background: var(--theme-gradient);
+}
+
+.gradient-button {
+  background: linear-gradient(275deg, #111827,#4B5563, #b62ca41e,  #4caefe95);
+}
+
+.text-hover { 
+  color: white;
+}
+
+.text-hover:hover{
+   background: var(--theme-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.font-primary {
+  font-family: var(--font-teachers), sans-serif !important;
+}
+
+.text-gd {
+   background: var(--theme-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.extralight, .extralight * {
+  font-family: var(--font-raleway), sans-serif !important;
+  font-weight: 200 !important;
 }
