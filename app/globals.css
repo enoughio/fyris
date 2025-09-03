@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+:root {
+  --background: #171717;
+  --foreground: #f5f5f5;
+  --color-light: #26C5EF;
+  --color-purple: #4C61C0;
+  --color-third: #914BAC;
+  --font-teachers: var(--teachers); /* Add this line */
+  --theme-gradient: linear-gradient(90deg, var(--color-light), var(--color-purple), var(--color-third));
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-teachers, sans-serif); /* Use Teachers font */
+}
+
+.header {
+  color: var(--color-light);
+}
+
+.button {
+  background: var(--color-purple);
+  color: var(--foreground);
+}
+
+.card {
+  border: 2px solid var(--color-third);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+
+.gradient-bg {
+  background: var(--theme-gradient);
+}
