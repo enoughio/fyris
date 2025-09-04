@@ -6,9 +6,13 @@
   --color-light: #26C5EF;
   --color-purple: #4C61C0;
   --color-third: #914BAC;
-  --font-raleway: var(--raleway);
-  --font-teachers: var(--teachers); /* Add this line */
   --theme-gradient: linear-gradient(90deg, var(--color-light), var(--color-purple), var(--color-third));
+}
+
+@theme inline {
+  --font-raleway: var(--raleway);
+  --font-teachers: var(--teachers);
+  --font-brunoace: var(--brunoace);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,9 +28,6 @@ body {
   font-family: var(--font-teachers, sans-serif); /* Use Teachers font */
 }
 
-.header {
-  color: var(--color-light);
-}
 
 .button {
   background: var(--color-purple);
@@ -39,6 +40,16 @@ body {
   color: var(--foreground);
 }
 
+
+.heading {
+  font-family: var(--brunoace), cursive, sans-serif;
+  font-weight: 500;
+}
+
+.section {
+  padding: 2rem 4rem ;
+  /* margin: 3rem 0; */
+} 
 
 .gradient-bg {
   background: var(--theme-gradient);
@@ -54,7 +65,7 @@ body {
 
 .text-hover:hover{
    background: var(--theme-gradient);
-  -webkit-background-clip: text;
+   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -64,7 +75,7 @@ body {
 
 .text-gd {
    background: var(--theme-gradient);
-  -webkit-background-clip: text;
+   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 

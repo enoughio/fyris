@@ -1,4 +1,4 @@
-import { Teachers, Raleway } from "next/font/google";
+import { Teachers, Raleway, Bruno_Ace } from "next/font/google";
 import "./globals.css";
 
 const teachers = Teachers({
@@ -7,6 +7,11 @@ const teachers = Teachers({
   variable: "--teachers",
 });
 
+const brunoAce = Bruno_Ace({
+  subsets: ["latin"],
+  weight: ["400"], // Bruno Ace only has 400
+  variable: "--brunoace",
+});
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -18,7 +23,7 @@ const raleway = Raleway({
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${teachers.variable} ${raleway.variable} antialiased`}>
+      <body className={`${teachers.variable} ${raleway.variable} ${brunoAce.variable} antialiased`}>
         {children}
       </body>
     </html>

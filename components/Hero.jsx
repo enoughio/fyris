@@ -16,12 +16,12 @@ const Hero = () => {
 
       <div>
         <div className="flex flex-col justify-center pt-[13vw] items-end w-full pr-[45%] h-full ">
-          <header className="-[15vw] -[15vw] pr-5">
+          <header className="-[15vw] -[15vw] pr-5 ">
             <div className="leading-none">
               <h1>
-                <span className="text-[1.3rem] font-primary">We </span>
-                <span className="text-[2rem]">Create </span>
-                <span className="text-[3rem] text-gd">Experience</span>
+                <span className=" text-[1.3rem] ">We </span>
+                <span className=" text-[2rem]">Create </span>
+                <span className=" text-[3rem] text-gd">Experience</span>
               </h1>
 
               <h1>
@@ -43,7 +43,7 @@ const Hero = () => {
 
         <div className="px-20 flex justify-between items-end w-full">
           {/* box */}
-          <div className="w-[24%] h-[270px] flex justify-center items-center gap-2 font-[var(--font-raleway)]">
+          <div className="w-[24%] h-[270px] flex justify-center items-center gap-2 font-teachers">
             <div className="  p-3 flex flex-col justify-center items-center gap-3 border-[.1px] border-gd rounded-md w-[50px] h-full ">
               <h1 className="[writing-mode:vertical-rl] rotate-180 text-[18px]">
                 Ready to <span>get started?</span>
