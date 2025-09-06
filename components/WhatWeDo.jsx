@@ -3,7 +3,7 @@ import React from "react";
 
 const WhatWeDo = () => {
   return (
-    <div className="w-screen h-[120vh]   bg-black overflow-hidden   ">
+    <div className="w-screen h-[120vh]   bg-[#0000001f] overflow-hidden backdrop-blur-3xl  ">
       <section className="section relative  ">
         <header className="text-[4rem] heading ">
           What we <span className="text-gd">do</span>

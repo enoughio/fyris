@@ -3,7 +3,7 @@ import React from 'react'
 
 const Navbar = () => {
   return (
-    <nav className='fixed w-full h-18 overflow-hidden top-0 left-0 backdrop-blur-3xl px-10 flex items-start justify-between p-4 z-10'>
+    <nav className='fixed w-full h-18 top-0 left-0 backdrop-blur-3xl px-10 flex items-start justify-between p-4 z-10'>
         <div className='menu-Item'>
             <ul className='extralight' >
                 <li className='text-hover'>Home</li>
